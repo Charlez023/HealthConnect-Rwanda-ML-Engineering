@@ -1,0 +1,65 @@
+HealthConnect Rwanda Week 6 - target and linkage diagnostics
+
+Clinical transactions workbook: HC_Clinical_Transactions.xlsx
+Sheets: Appointments, Diagnoses, Laboratory_Tests, Prescriptions, Admissions, Referrals
+- Appointments: 5000 rows; columns: AppointmentID, PatientID, DoctorID, FacilityID, DepartmentID, Date, VisitType
+- Diagnoses: 5000 rows; columns: DiagnosisID, AppointmentID, Diagnosis, Severity
+- Laboratory_Tests: 5000 rows; columns: LabID, AppointmentID, Test, Result
+- Prescriptions: 5000 rows; columns: PrescriptionID, AppointmentID, Medication, Dosage
+- Admissions: 5000 rows; columns: AdmissionID, AppointmentID, LengthOfStayDays
+- Referrals: 4708 rows; columns: ReferralID, AppointmentID, ReferredFacilityID
+
+Appointment/admission linkage checks (counts only; no labels are generated):
+- AppointmentID: unique appointment-side IDs=5000, unique admission-side IDs=5000, shared unique IDs=586
+- PatientID: cannot compare; column absent from one or both sheets.
+
+Claims source: Insurance_Claims.csv; rows=42036
+Columns: ClaimID, BillingID, Provider, ClaimAmount, Status
+Claim status counts: {'Pending': 21028, 'Approved': 21008}
+Rejected status present: False
+
+Lab result numeric parse: 0 / 5000 numeric values.
+Lab result sample values: ['Abnormal', 'Normal', 'Normal', 'Normal', 'Normal', 'Abnormal', 'Abnormal', 'Abnormal']
+Do not apply clinical thresholds without units and validated reference ranges.
+
+## Patient satisfaction classification
+Dataset: patient_satisfaction_model.csv; rows=1756; columns=19
+Target counts: {'Low': 719, 'High': 650, 'Medium': 387}
+Unique target classes: 3
+Predictor columns used: VisitType, Age, Gender, MaritalStatus, Occupation, Education, BloodGroup, HeightCm, WeightKg, ChronicCondition, BMI, Date_month, Date_dayofweek
+Results are in Reports/Week6_Diagnostic_Model_Comparison.csv.
+
+## High-risk classification (severity proxy)
+Dataset: high_risk_severity_proxy.csv; rows=5000; columns=19
+Target counts: {'0': 3378, '1': 1622}
+Unique target classes: 2
+Predictor columns used: VisitType, Age, Gender, MaritalStatus, Occupation, Education, BloodGroup, HeightCm, WeightKg, ChronicCondition, BMI, Date_month, Date_dayofweek
+Results are in Reports/Week6_Diagnostic_Model_Comparison.csv.
+
+## Insurance claim outcome (Approved vs Pending alternative)
+Dataset: claims_approved_pending_alternative.csv; rows=42036; columns=5
+Target counts: {'Pending': 21028, 'Approved': 21008}
+Unique target classes: 2
+Predictor columns used: ClaimAmount, Amount
+Results are in Reports/Week6_Diagnostic_Model_Comparison.csv.
+
+## Billing amount prediction
+Dataset: billing_amount_model.csv; rows=5000; columns=19
+Target range: min=10084.0000; median=153724.0000; max=299968.0000
+Predictor columns used: VisitType, Age, Gender, MaritalStatus, Occupation, Education, BloodGroup, HeightCm, WeightKg, ChronicCondition, BMI, Date_month, Date_dayofweek
+Results are in Reports/Week6_Diagnostic_Model_Comparison.csv.
+
+## Length of stay prediction
+Dataset: length_of_stay_model.csv; rows=586; columns=19
+Target range: min=1.0000; median=6.0000; max=10.0000
+Predictor columns used: VisitType, Age, Gender, MaritalStatus, Occupation, Education, BloodGroup, HeightCm, WeightKg, ChronicCondition, BMI, Date_month, Date_dayofweek
+Results are in Reports/Week6_Diagnostic_Model_Comparison.csv.
+
+## Interpretation rules
+- Compare each fitted model with the dummy baseline on the same holdout split.
+- A candidate is not an improvement unless it beats the relevant dummy baseline on appropriate metrics.
+- Do not select a model using accuracy alone; inspect macro F1, balanced accuracy, ROC-AUC and confusion matrices for classification.
+- For regression, compare MAE/RMSE/R² with the mean baseline. Negative R² is worse than predicting the test-set mean.
+- These are diagnostic holdout comparisons, not final clinical validation or deployment approval.
+- The script does not create admission labels or rejected claims labels.
+- Candidate models are saved separately in Models/Improved_Candidates; existing model files are not overwritten.

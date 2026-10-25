@@ -1,0 +1,28 @@
+HealthConnect Rwanda Week 6 - Facility Clustering Review
+
+Method: KMeans with three exploratory clusters using standardized counts
+from direct FacilityID records in appointments, doctors, nurses, departments,
+equipment, rooms and beds. Beds are assigned through the direct RoomID-to-room
+relationship. Appointment DepartmentID is not joined to department FacilityID.
+
+Limitations:
+- No verified facility names, ownership, type or province were inferred.
+- Record counts are not proof of active staffing, equipment availability, bed occupancy,
+  quality of care, workload, or facility performance.
+- Clusters are exploratory and should not be used alone to reallocate resources.
+- Department/facility mismatches remain a documented source-data limitation.
+- Staffing, department, equipment, room and bed counts are identical or nearly identical
+  across these facilities; the resulting groups are driven mainly by appointment-record
+  volume and should be treated as a preliminary segmentation only.
+
+Cluster profiles (mean counts unless otherwise indicated):
+- Segment 0: 10 facilities; FacilityIDs=HF011, HF012, HF013, HF014, HF015, HF016, HF017, HF018, HF019, HF020; mean appointment records=251.9; mean recorded resource footprint=192.0.
+  Planning consideration: Review staffing, room and equipment planning against verified workload and service hours; appointment counts alone do not establish overcrowding.
+- Segment 1: 5 facilities; FacilityIDs=HF002, HF004, HF005, HF007, HF009; mean appointment records=230.2; mean recorded resource footprint=193.0.
+  Planning consideration: Check whether recorded resources are active and compare with verified utilization before considering any resource reallocation.
+- Segment 2: 5 facilities; FacilityIDs=HF001, HF003, HF006, HF008, HF010; mean appointment records=266.0; mean recorded resource footprint=193.0.
+  Planning consideration: Review facility-specific workload and resource utilization; the cluster describes recorded counts, not service quality or capacity adequacy.
+
+Overall interpretation: the clusters group facilities by the supplied operational record counts.
+Validate records with facility administrators and add reliable utilization, service-scope and
+outcome measures before drawing stronger conclusions.

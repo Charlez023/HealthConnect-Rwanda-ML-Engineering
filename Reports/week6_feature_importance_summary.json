@@ -1,0 +1,262 @@
+[
+  {
+    "task": "patient_satisfaction_classification__rating_derived.joblib",
+    "status": "ok",
+    "sample_rows": 500,
+    "top_features": [
+      {
+        "Feature": "HeightCm",
+        "ImportanceMean": 0.02933333333333336,
+        "ImportanceStd": 0.00659966329107445
+      },
+      {
+        "Feature": "Date_month",
+        "ImportanceMean": 0.02733333333333336,
+        "ImportanceStd": 0.0024944382578492965
+      },
+      {
+        "Feature": "MaritalStatus",
+        "ImportanceMean": 0.02666666666666669,
+        "ImportanceStd": 0.004988876515698593
+      },
+      {
+        "Feature": "VisitType",
+        "ImportanceMean": 0.023333333333333355,
+        "ImportanceStd": 0.0041096093353126546
+      },
+      {
+        "Feature": "Age",
+        "ImportanceMean": 0.018000000000000016,
+        "ImportanceStd": 0.0016329931618554536
+      },
+      {
+        "Feature": "Occupation",
+        "ImportanceMean": 0.018000000000000016,
+        "ImportanceStd": 0.005887840577551903
+      },
+      {
+        "Feature": "Gender",
+        "ImportanceMean": 0.012666666666666678,
+        "ImportanceStd": 0.0018856180831641283
+      },
+      {
+        "Feature": "BMI",
+        "ImportanceMean": 0.01200000000000001,
+        "ImportanceStd": 0.0043204937989385775
+      },
+      {
+        "Feature": "WeightKg",
+        "ImportanceMean": 0.011333333333333343,
+        "ImportanceStd": 0.0024944382578492965
+      },
+      {
+        "Feature": "Date_dayofweek",
+        "ImportanceMean": 0.011333333333333343,
+        "ImportanceStd": 0.0033993463423951926
+      }
+    ],
+    "file": "Reports/feature_importance_patient_satisfaction_classification__rating_derived.csv",
+    "note": "Permutation importance on a sample; association with model predictions, not causal explanation. Rankings are exploratory and should be interpreted alongside baseline performance."
+  },
+  {
+    "task": "high_risk_patient_classification__severity_proxy.joblib",
+    "status": "ok",
+    "sample_rows": 500,
+    "top_features": [
+      {
+        "Feature": "HeightCm",
+        "ImportanceMean": 0.18333333333333338,
+        "ImportanceStd": 0.012472191289246483
+      },
+      {
+        "Feature": "BMI",
+        "ImportanceMean": 0.17200000000000004,
+        "ImportanceStd": 0.0043204937989385775
+      },
+      {
+        "Feature": "BloodGroup",
+        "ImportanceMean": 0.09533333333333342,
+        "ImportanceStd": 0.003399346342395193
+      },
+      {
+        "Feature": "Age",
+        "ImportanceMean": 0.08800000000000008,
+        "ImportanceStd": 0.00979795897113272
+      },
+      {
+        "Feature": "WeightKg",
+        "ImportanceMean": 0.08466666666666674,
+        "ImportanceStd": 0.0041096093353126546
+      },
+      {
+        "Feature": "Occupation",
+        "ImportanceMean": 0.07266666666666673,
+        "ImportanceStd": 0.003399346342395193
+      },
+      {
+        "Feature": "ChronicCondition",
+        "ImportanceMean": 0.059333333333333384,
+        "ImportanceStd": 0.0041096093353126546
+      },
+      {
+        "Feature": "Education",
+        "ImportanceMean": 0.05666666666666672,
+        "ImportanceStd": 0.00659966329107445
+      },
+      {
+        "Feature": "MaritalStatus",
+        "ImportanceMean": 0.052000000000000046,
+        "ImportanceStd": 0.0043204937989385775
+      },
+      {
+        "Feature": "Date_month",
+        "ImportanceMean": 0.04666666666666671,
+        "ImportanceStd": 0.005734883511361756
+      }
+    ],
+    "file": "Reports/feature_importance_high_risk_patient_classification__severity_proxy.csv",
+    "note": "Permutation importance on a sample; association with model predictions, not causal explanation. Rankings are exploratory and should be interpreted alongside baseline performance."
+  },
+  {
+    "task": "insurance_claim_outcome__approved_vs_pending_alternative.joblib",
+    "status": "ok",
+    "sample_rows": 500,
+    "top_features": [
+      {
+        "Feature": "ClaimAmount",
+        "ImportanceMean": 0.3746666666666667,
+        "ImportanceStd": 0.010624918300339493
+      },
+      {
+        "Feature": "Amount",
+        "ImportanceMean": 0.37399999999999994,
+        "ImportanceStd": 0.023551362310207612
+      },
+      {
+        "Feature": "Provider",
+        "ImportanceMean": 0.3460000000000001,
+        "ImportanceStd": 0.010198039027185529
+      }
+    ],
+    "file": "Reports/feature_importance_insurance_claim_outcome__approved_vs_pending_alternative.csv",
+    "note": "Permutation importance on a sample; association with model predictions, not causal explanation. Rankings are exploratory and should be interpreted alongside baseline performance."
+  },
+  {
+    "task": "billing_amount_prediction.joblib",
+    "status": "uninformative_zero_importance",
+    "sample_rows": 500,
+    "top_features": [
+      {
+        "Feature": "VisitType",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "Age",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "Gender",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "MaritalStatus",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "Occupation",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "Education",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "BloodGroup",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "HeightCm",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "WeightKg",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      },
+      {
+        "Feature": "ChronicCondition",
+        "ImportanceMean": 0.0,
+        "ImportanceStd": 0.0
+      }
+    ],
+    "file": "Reports/feature_importance_billing_amount_prediction.csv",
+    "note": "All mean permutation importances are zero. Permuting the sampled features did not measurably change the model score; this explanation is uninformative."
+  },
+  {
+    "task": "length_of_stay_prediction.joblib",
+    "status": "ok",
+    "sample_rows": 500,
+    "top_features": [
+      {
+        "Feature": "MaritalStatus",
+        "ImportanceMean": 0.8442220370370374,
+        "ImportanceStd": 0.011981586217986258
+      },
+      {
+        "Feature": "Education",
+        "ImportanceMean": 0.7858638888888891,
+        "ImportanceStd": 0.0379602079208077
+      },
+      {
+        "Feature": "Occupation",
+        "ImportanceMean": 0.49913037037037045,
+        "ImportanceStd": 0.016277219395892016
+      },
+      {
+        "Feature": "VisitType",
+        "ImportanceMean": 0.46423148148148163,
+        "ImportanceStd": 0.019337135797487734
+      },
+      {
+        "Feature": "ChronicCondition",
+        "ImportanceMean": 0.4608892592592593,
+        "ImportanceStd": 0.029256200863363606
+      },
+      {
+        "Feature": "BloodGroup",
+        "ImportanceMean": 0.4061548148148151,
+        "ImportanceStd": 0.01774098086708287
+      },
+      {
+        "Feature": "Date_dayofweek",
+        "ImportanceMean": 0.281002777777778,
+        "ImportanceStd": 0.032871381423156903
+      },
+      {
+        "Feature": "Date_month",
+        "ImportanceMean": 0.24743388888888926,
+        "ImportanceStd": 0.023672005466338502
+      },
+      {
+        "Feature": "Age",
+        "ImportanceMean": 0.2011072222222224,
+        "ImportanceStd": 0.009237290579103706
+      },
+      {
+        "Feature": "HeightCm",
+        "ImportanceMean": 0.1707009259259261,
+        "ImportanceStd": 0.004777265978904339
+      }
+    ],
+    "file": "Reports/feature_importance_length_of_stay_prediction.csv",
+    "note": "Permutation importance on a sample; association with model predictions, not causal explanation. Rankings are exploratory and should be interpreted alongside baseline performance."
+  }
+]

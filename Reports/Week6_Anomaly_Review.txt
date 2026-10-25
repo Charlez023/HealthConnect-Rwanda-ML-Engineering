@@ -1,0 +1,14 @@
+HealthConnect Rwanda Week 6 - exploratory anomaly review
+Flags use statistical/structural rules only. They are not proof of fraud, prescribing error, disease, or clinical abnormality.
+Laboratory results not parseable as numeric: 5000 of 5000.
+Laboratory Result values are summarized as categories only; no units or clinical reference ranges are available, so this is not a clinical abnormality assessment.
+The dataset contains no Rejected insurance claims, so suspicious-claim checks cannot validate rejection detection.
+Medical equipment has no status/availability field in the inspected schema; bed status is summarized separately.
+
+- anomaly_unusual_billing.csv: 0 flagged rows / 60000 source rows. Amount outside 1.5×IQR bounds (-136173.50, 446356.50); investigate, not proof of error
+- anomaly_claims_review.csv: 0 flagged rows / 42036 source rows. ClaimAmount outside 1.5×IQR bounds (-99878.11, 324206.76) or missing status; no Rejected class in source
+- anomaly_lab_result_categories.csv: 0 flagged rows / 5000 source rows. Categorical results summarized across 2 values; no clinical abnormality is inferred
+- anomaly_frequent_medications.csv: 1068 flagged rows / 5000 source rows. Medication appears among medication values above the 95th percentile of frequency; frequency alone is not suspicious
+- anomaly_duplicate_patient_summary.csv: 0 flagged rows / 20000 source rows. Duplicate identifier and exact-row counts; no personal details exported
+- anomaly_facility_appointment_volume.csv: 0 flagged rows / 20 source rows. Facility appointment count outside 1.5×IQR bounds (193.12, 316.12); investigate context
+- anomaly_repeated_prescription_patterns.csv: 0 flagged rows / 5000 source rows. Repeated appointment-medication-dosage combination; may be legitimate and needs review

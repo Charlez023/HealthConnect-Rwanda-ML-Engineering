@@ -1,0 +1,18 @@
+HealthConnect Rwanda Week 6 — SHAP Explainability
+
+Model: Decision Tree classifier fitted on the existing HighRiskProxy target.
+Dataset: Data/Processed_Datasets/high_risk_severity_proxy.csv
+Rows used: 5000; held-out test rows: 1000; rows explained: 100.
+
+Outputs:
+- Reports/Week6_SHAP_Feature_Importance.csv: global mean absolute SHAP values.
+- Reports/Week6_SHAP_Feature_Importance.png: top 15 encoded features.
+- Reports/Week6_SHAP_Individual_Explanations.csv: up to 10 individual explanations.
+- Models/high_risk_severity_proxy_shap_tree.joblib: fitted pipeline used for these explanations.
+
+Interpretation and limitations:
+- SHAP values explain this fitted model's output; they do not establish causation.
+- HighRiskProxy is a constructed severity proxy, not a clinically validated outcome.
+- Encoded categorical levels appear as separate features; importance can be split across levels.
+- Existing baseline performance is weak, so explanations describe a weak exploratory model and must not guide clinical decisions.
+- This implements SHAP; LIME is not implemented by this script.

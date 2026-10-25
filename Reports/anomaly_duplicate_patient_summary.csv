@@ -1,0 +1,3 @@
+check,flagged_rows,interpretation
+Duplicate PatientID,0,Identifier duplication check; audit previously found unique PatientID values.
+Exact duplicate patient rows,0,Exact-row duplication check only; does not identify different IDs belonging to the same person.

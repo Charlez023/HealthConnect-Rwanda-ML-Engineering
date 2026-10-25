@@ -1,0 +1,190 @@
+HealthConnect Rwanda Week 6 - Baseline Model Evaluation
+
+This report summarizes existing baseline metrics; it does not retrain models.
+Results are exploratory and should not be interpreted as clinically validated.
+
+## Results
+
+### Patient satisfaction classification (rating-derived)
+- rows: 1756
+- test_rows: 352.0000
+- selected_model: Random Forest
+- validation_f1_macro: 0.3909
+- accuracy: 0.3778
+- precision_macro: 0.3679
+- recall_macro: 0.3615
+- f1_macro: 0.3635
+- baseline_accuracy: 0.4091
+- baseline_f1_macro: 0.1935
+- roc_auc_ovr_macro: 0.4991
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc: not reported
+- validation_MAE: not reported
+- MAE: not reported
+- RMSE: not reported
+- R2: not reported
+- MAPE_percent: not reported
+- baseline_MAE: not reported
+- baseline_RMSE: not reported
+- baseline_R2: not reported
+- clusters: not reported
+
+### High-risk patient classification (severity proxy)
+- rows: 5000
+- test_rows: 1,000.00
+- selected_model: Decision Tree
+- validation_f1_macro: 0.4830
+- accuracy: 0.5020
+- precision_macro: 0.4828
+- recall_macro: 0.4806
+- f1_macro: 0.4742
+- baseline_accuracy: 0.6760
+- baseline_f1_macro: 0.4033
+- roc_auc_ovr_macro: not reported
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc: 0.4747
+- validation_MAE: not reported
+- MAE: not reported
+- RMSE: not reported
+- R2: not reported
+- MAPE_percent: not reported
+- baseline_MAE: not reported
+- baseline_RMSE: not reported
+- baseline_R2: not reported
+- clusters: not reported
+
+### Insurance claim outcome (Approved vs Pending alternative)
+- rows: 42036
+- test_rows: 8,408.00
+- selected_model: Random Forest
+- validation_f1_macro: 0.5017
+- accuracy: 0.5002
+- precision_macro: 0.5002
+- recall_macro: 0.5002
+- f1_macro: 0.5002
+- baseline_accuracy: 0.5002
+- baseline_f1_macro: 0.3334
+- roc_auc_ovr_macro: not reported
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc: 0.4999
+- validation_MAE: not reported
+- MAE: not reported
+- RMSE: not reported
+- R2: not reported
+- MAPE_percent: not reported
+- baseline_MAE: not reported
+- baseline_RMSE: not reported
+- baseline_R2: not reported
+- clusters: not reported
+
+### Billing amount prediction
+- rows: 5000
+- test_rows: 1,000.00
+- selected_model: Dummy (mean)
+- validation_f1_macro: not reported
+- accuracy: not reported
+- precision_macro: not reported
+- recall_macro: not reported
+- f1_macro: not reported
+- baseline_accuracy: not reported
+- baseline_f1_macro: not reported
+- roc_auc_ovr_macro: not reported
+- note: Random split; assess prediction-time feature availability before interpreting.
+- roc_auc: not reported
+- validation_MAE: 71,708.84
+- MAE: 70,207.14
+- RMSE: 81,883.15
+- R2: -0.0023
+- MAPE_percent: 113.9702
+- baseline_MAE: 70,207.14
+- baseline_RMSE: 81,883.15
+- baseline_R2: -0.0023
+- clusters: not reported
+
+### Length of stay prediction
+- rows: 586
+- test_rows: 118.0000
+- selected_model: Extra Trees
+- validation_f1_macro: not reported
+- accuracy: not reported
+- precision_macro: not reported
+- recall_macro: not reported
+- f1_macro: not reported
+- baseline_accuracy: not reported
+- baseline_f1_macro: not reported
+- roc_auc_ovr_macro: not reported
+- note: Random split; assess prediction-time feature availability before interpreting.
+- roc_auc: not reported
+- validation_MAE: 2.2664
+- MAE: 2.4745
+- RMSE: 3.0130
+- R2: -0.1554
+- MAPE_percent: 93.6352
+- baseline_MAE: 2.3533
+- baseline_RMSE: 2.8167
+- baseline_R2: -0.0098
+- clusters: not reported
+
+### Patient clustering
+- rows: 20000
+- test_rows: not reported
+- selected_model: not reported
+- validation_f1_macro: not reported
+- accuracy: not reported
+- precision_macro: not reported
+- recall_macro: not reported
+- f1_macro: not reported
+- baseline_accuracy: not reported
+- baseline_f1_macro: not reported
+- roc_auc_ovr_macro: not reported
+- note: Exploratory patient segments; assess stability and clinical usefulness before use.
+- roc_auc: not reported
+- validation_MAE: not reported
+- MAE: not reported
+- RMSE: not reported
+- R2: not reported
+- MAPE_percent: not reported
+- baseline_MAE: not reported
+- baseline_RMSE: not reported
+- baseline_R2: not reported
+- clusters: 4.0000
+
+### Facility clustering
+- rows: 20
+- test_rows: not reported
+- selected_model: KMeans (3 clusters)
+- validation_f1_macro: not reported
+- accuracy: not reported
+- precision_macro: not reported
+- recall_macro: not reported
+- f1_macro: not reported
+- baseline_accuracy: not reported
+- baseline_f1_macro: not reported
+- roc_auc_ovr_macro: not reported
+- note: Exploratory facility segmentation from direct FacilityID record counts; not a facility performance rating.
+- roc_auc: not reported
+- validation_MAE: not reported
+- MAE: not reported
+- RMSE: not reported
+- R2: not reported
+- MAPE_percent: not reported
+- baseline_MAE: not reported
+- baseline_RMSE: not reported
+- baseline_R2: not reported
+- clusters: 3.0000
+
+## Interpretation and limitations
+- Baseline classification scores near chance indicate weak predictive performance.
+- Negative regression R² values indicate worse performance than predicting the test-set mean.
+- The claims model is only an Approved-versus-Pending alternative; the source has no Rejected labels.
+- The high-risk target is a severity-derived proxy, not a clinically validated risk label.
+- Satisfaction classes are derived from feedback ratings, not a separately supplied clinical outcome.
+- Length-of-stay results use only appointment-linked admissions, a limited subset of the available admission records.
+- Model metrics and feature-importance rankings do not establish causation or clinical usefulness.
+- Do not use these baseline models to make real patient-care, insurance, or billing decisions.
+
+## Recorded target limitations
+- Task: Hospital admission classification; Status: Not labelled in this script; Limitation: Admission sheet appointment IDs overlap only partially with Appointments; unmatched records cannot safely be labelled non-admissions.
+- Task: Insurance claim outcome (3 classes); Status: Not trainable with current labels; Limitation: Observed claim statuses are Approved and Pending; no Rejected records were found.
+- Task: High-risk classification; Status: Proxy target provided; Limitation: Severe diagnosis is used as a transparent proxy, not a clinically validated risk label.
+- Task: Facility clustering; Status: Requires further validation; Limitation: Facility-to-department linkage rates in the audit were about 5%; avoid unsupported facility-level conclusions.

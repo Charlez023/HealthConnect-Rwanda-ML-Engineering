@@ -1,0 +1,24 @@
+{
+  "task": "Facility clustering",
+  "facility_rows": 20,
+  "cluster_count": 3,
+  "cluster_sizes": {
+    "0": 10,
+    "1": 5,
+    "2": 5
+  },
+  "feature_columns": [
+    "AppointmentRecords",
+    "DoctorRecords",
+    "NurseRecords",
+    "DepartmentRecords",
+    "EquipmentRecords",
+    "RoomRecords",
+    "BedRecords"
+  ],
+  "dataset": "Data/Processed_Datasets/facility_clustering.csv",
+  "segments": "Data/Processed_Datasets/facility_segments.csv",
+  "profiles": "Reports/facility_cluster_profiles.csv",
+  "report": "Reports/Week6_Facility_Clustering_Report.txt",
+  "limitation": "Exploratory record-count clusters; not facility performance ratings."
+}

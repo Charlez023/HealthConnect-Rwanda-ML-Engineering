@@ -1,0 +1,19 @@
+## Responsible AI and Interpretation
+
+### Interpretation Limitations
+Permutation importance measures how much shuffling a feature affects the fitted model's score. It does not establish causation or prove that a feature is clinically meaningful. Because the baseline models perform poorly, the rankings should be treated as exploratory rather than reliable clinical explanations.
+
+### Key Observations
+- **Patient satisfaction:** The model assigns its highest reported importance to HeightCm, Date_month, and MaritalStatus. The model performs poorly, so these rankings should not be interpreted as dependable drivers of patient satisfaction.
+- **High-risk patient classification:** HeightCm and BMI have the highest reported importance. The target is a severity proxy, and the model performs worse than the majority-class baseline. These features should not be treated as validated clinical risk factors.
+- **Insurance claims:** ClaimAmount, Amount, and Provider have the highest reported importance. The task distinguishes Approved from Pending claims only; the dataset does not provide a Rejected class. The results do not establish reliable claim-outcome prediction.
+- **Billing amount:** All reported permutation importance values are zero. This explanation is uninformative and does not demonstrate that the model is accurate or that the features are irrelevant.
+- **Length of stay:** MaritalStatus and Education have the highest reported importance. The model performs worse than the mean baseline, so the rankings are not sufficient to support operational or clinical decisions.
+
+### Responsible AI Recommendations
+- Do not use these baseline models as the sole basis for diagnosis, treatment, patient prioritization, insurance decisions, or resource allocation.
+- Review data quality, target definitions, dataset linkage, and model performance before interpreting feature rankings.
+- Assess potential bias across relevant patient groups before considering any future deployment.
+- Protect patient confidentiality and restrict access to sensitive data.
+- Require qualified human review and further validation before using model outputs in healthcare decisions.
+- Document model limitations and reassess performance when better-quality data and verified outcomes become available.

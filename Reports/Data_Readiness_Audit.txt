@@ -1,0 +1,110 @@
+HEALTHCONNECT RWANDA - WEEK 6 DATA READINESS AUDIT
+==========================================================
+Original data files found: 27
+ - HC_Administrative_Staff.csv
+ - HC_Beds.csv
+ - HC_Billing.csv
+ - HC_Clinical_Transactions.xlsx
+ - HC_Departments.csv
+ - HC_Diagnoses.csv
+ - HC_Districts.csv
+ - HC_Doctor.csv
+ - HC_Facility_Master_Data.xlsx
+ - HC_Medical_Equipment.csv
+ - HC_Medical_Specialties.csv
+ - HC_Nurse.csv
+ - HC_Ownership_Types.csv
+ - HC_Patient_Feedback.csv
+ - HC_Patients.csv
+ - HC_Payments.csv
+ - HC_Provinces.csv
+ - HC_Radiographer.csv
+ - HC_Revenue_Summary.csv
+ - HC_Rooms.csv
+ - HC_Sectors.csv
+ - HC_Services.csv
+ - HC_Villages.csv
+ - HCCountries.csv
+ - Insurance_Claims.csv
+ - Laboratory_Scientist.csv
+ - Pharmacist.csv
+
+1. TABLE SIZES
+----------------------------------------------------------
+Appointments worksheet: 5,000 rows
+Diagnoses worksheet: 5,000 rows
+Laboratory_Tests worksheet: 5,000 rows
+Prescriptions worksheet: 5,000 rows
+Admissions worksheet: 5,000 rows
+Referrals worksheet: 4,708 rows
+HC_Diagnoses.csv: 60,000 rows
+HC_Billing.csv: 60,000 rows
+HC_Payments.csv: 60,000 rows
+HC_Patient_Feedback.csv: 21,064 rows
+Insurance_Claims.csv: 42,036 rows
+HC_Revenue_Summary.csv: 12 rows
+HC_Departments.csv: 200 rows
+HC_Doctor.csv: 350 rows
+HC_Nurse.csv: 700 rows
+HC_Beds.csv: 2,000 rows
+
+2. APPOINTMENT LINKAGE
+----------------------------------------------------------
+Appointments distinct IDs: 5,000
+Appointments ID range: APT000001 to APT005000
+Clinical Transactions / Diagnoses: 5,000 rows; 5,000 distinct appointment IDs; 0 rows (0.0%) have no matching appointment
+Clinical Transactions / Laboratory_Tests: 5,000 rows; 5,000 distinct appointment IDs; 2,728 rows (54.6%) have no matching appointment
+Clinical Transactions / Prescriptions: 5,000 rows; 5,000 distinct appointment IDs; 997 rows (19.9%) have no matching appointment
+Clinical Transactions / Admissions: 5,000 rows; 5,000 distinct appointment IDs; 4,414 rows (88.3%) have no matching appointment
+Clinical Transactions / Referrals: 4,708 rows; 4,708 distinct appointment IDs; 4,293 rows (91.2%) have no matching appointment
+HC_Diagnoses.csv: 60,000 rows; 60,000 distinct appointment IDs; 55,000 rows (91.7%) have no matching appointment
+HC_Billing.csv: 60,000 rows; 60,000 distinct appointment IDs; 55,000 rows (91.7%) have no matching appointment
+HC_Patient_Feedback.csv: 21,064 rows; 21,064 distinct appointment IDs; 19,308 rows (91.7%) have no matching appointment
+
+3. INSURANCE CLAIM TARGET
+----------------------------------------------------------
+Claims rows: 42,036
+Status counts:
+ - Pending: 21,028
+ - Approved: 21,008
+Missing claim statuses: 0
+
+4. BILLING / PAYMENT / REVENUE RECONCILIATION
+----------------------------------------------------------
+Total billed (HC_Billing.Amount): RWF 9,309,401,961.00
+Total recorded payments (HC_Payments.AmountPaid): RWF 8,389,454,556.00
+Revenue Summary total (Revenue column): RWF 1,132,677,500.00
+Billing IDs: 60,000; payment BillingIDs: 60,000
+Bills where recorded payments < billed amount: 11,887
+Bills where recorded payments > billed amount: 0
+Bills where recorded payments = billed amount: 48,113
+Note: these are arithmetic comparisons, not a verified accounting definition of revenue.
+
+5. FACILITY / DEPARTMENT LINKAGE
+----------------------------------------------------------
+Doctors: 17/350 rows with a department facility available match the record FacilityID (4.9% of comparable rows)
+Nurses: 35/700 rows with a department facility available match the record FacilityID (5.0% of comparable rows)
+Appointments: 256/5,000 rows with a department facility available match the record FacilityID (5.1% of comparable rows)
+Facility master attributes: inspect the supplied workbook sheets; this audit does not invent facility names or locations.
+
+6. BED STATUS AND EQUIPMENT LIMITATION
+----------------------------------------------------------
+Bed rows: 2,000
+ - Bed status Available: 2,000
+Equipment availability: the supplied equipment schema has no availability/status field unless the source schema changes.
+
+7. DUPLICATE / MISSING IDENTIFIER CHECKS
+----------------------------------------------------------
+Appointments.AppointmentID: missing=0; duplicate values=0
+HC_Billing.BillingID: missing=0; duplicate values=0
+HC_Payments.PaymentID: missing=0; duplicate values=0
+Insurance_Claims.ClaimID: missing=0; duplicate values=0
+HC_Patient_Feedback.FeedbackID: missing=0; duplicate values=0
+HC_Patients.PatientID: missing=0; duplicate values=0
+
+INTERPRETATION
+----------------------------------------------------------
+This audit identifies data constraints; it does not clean or alter source data.
+Use task-specific modelling populations and only valid joins. Keep unmatched records for tasks where their available fields remain sufficient.
+Do not fabricate rejected claims, missing appointments, facility attributes, bed occupancy, or equipment availability.
+Confirm target definitions and prediction timing before feature engineering, especially for high-risk and admission prediction.

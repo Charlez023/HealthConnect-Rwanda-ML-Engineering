@@ -1,0 +1,5 @@
+Task,Status,Limitation
+Hospital admission classification,Not labelled in this script,Admission sheet appointment IDs overlap only partially with Appointments; unmatched records cannot safely be labelled non-admissions.
+Insurance claim outcome (3 classes),Not trainable with current labels,Observed claim statuses are Approved and Pending; no Rejected records were found.
+High-risk classification,Proxy target provided,"Severe diagnosis is used as a transparent proxy, not a clinically validated risk label."
+Facility clustering,Requires further validation,Facility-to-department linkage rates in the audit were about 5%; avoid unsupported facility-level conclusions.

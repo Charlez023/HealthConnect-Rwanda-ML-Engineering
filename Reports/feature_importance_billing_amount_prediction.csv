@@ -1,0 +1,14 @@
+Feature,ImportanceMean,ImportanceStd
+VisitType,0.0,0.0
+Age,0.0,0.0
+Gender,0.0,0.0
+MaritalStatus,0.0,0.0
+Occupation,0.0,0.0
+Education,0.0,0.0
+BloodGroup,0.0,0.0
+HeightCm,0.0,0.0
+WeightKg,0.0,0.0
+ChronicCondition,0.0,0.0
+BMI,0.0,0.0
+Date_month,0.0,0.0
+Date_dayofweek,0.0,0.0

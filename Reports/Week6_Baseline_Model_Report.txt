@@ -1,0 +1,118 @@
+HealthConnect Rwanda Week 6 - model comparison results
+Educational baseline results only; not clinically validated.
+
+## Patient satisfaction classification (rating-derived)
+- task: Patient satisfaction classification (rating-derived)
+- dataset: patient_satisfaction_model.csv
+- target: SatisfactionClass
+- rows: 1756
+- test_rows: 352
+- classes: ['High', 'Low', 'Medium']
+- selected_model: Random Forest
+- validation_f1_macro: 0.3909314005487956
+- candidate_validation_f1_macro: {'Dummy (most frequent)': 0.19393939393939394, 'Logistic Regression': 0.33314983528714154, 'Decision Tree': 0.340235096030155, 'Random Forest': 0.3909314005487956, 'Extra Trees': 0.3814033727165771}
+- accuracy: 0.3778409090909091
+- precision_macro: 0.36787967666505406
+- recall_macro: 0.36146723646723644
+- f1_macro: 0.3635147056745031
+- baseline_accuracy: 0.4090909090909091
+- baseline_f1_macro: 0.19354838709677422
+- confusion_matrix_labels: ['High', 'Low', 'Medium']
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc_ovr_macro: 0.49914403454549433
+- confusion_matrix_labels: ['High', 'Low', 'Medium']
+- confusion_matrix: [[50, 63, 17], [55, 62, 27], [23, 34, 21]]
+
+## High-risk patient classification (severity proxy)
+- task: High-risk patient classification (severity proxy)
+- dataset: high_risk_severity_proxy.csv
+- target: HighRiskProxy
+- rows: 5000
+- test_rows: 1000
+- classes: ['0', '1']
+- selected_model: Decision Tree
+- validation_f1_macro: 0.48297604035308955
+- candidate_validation_f1_macro: {'Dummy (most frequent)': 0.4033412887828162, 'Logistic Regression': 0.4638480392156863, 'Decision Tree': 0.48297604035308955, 'Random Forest': 0.4735267885540122, 'Extra Trees': 0.46162772533529717}
+- accuracy: 0.502
+- precision_macro: 0.4827912774602969
+- recall_macro: 0.48058660238147416
+- f1_macro: 0.4741843522331327
+- baseline_accuracy: 0.676
+- baseline_f1_macro: 0.4033412887828162
+- confusion_matrix_labels: ['0', '1']
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc: 0.4747059682957119
+- confusion_matrix_labels: ['0', '1']
+- confusion_matrix: [[366, 310], [188, 136]]
+
+## Insurance claim outcome (Approved vs Pending alternative)
+- task: Insurance claim outcome (Approved vs Pending alternative)
+- dataset: claims_approved_pending_alternative.csv
+- target: ClaimStatusBinary
+- rows: 42036
+- test_rows: 8408
+- classes: ['Approved', 'Pending']
+- selected_model: Random Forest
+- validation_f1_macro: 0.5017184081288176
+- candidate_validation_f1_macro: {'Dummy (most frequent)': 0.3334126228988265, 'Logistic Regression': 0.5004151251572637, 'Decision Tree': 0.498674531114913, 'Random Forest': 0.5017184081288176, 'Extra Trees': 0.49505103473412465}
+- accuracy: 0.5002378686964796
+- precision_macro: 0.5002380952380953
+- recall_macro: 0.5002380950764337
+- f1_macro: 0.5002378404191785
+- baseline_accuracy: 0.5002378686964796
+- baseline_f1_macro: 0.3334390359917552
+- confusion_matrix_labels: ['Approved', 'Pending']
+- note: Dataset labels are proxies/observed alternatives; not clinical validation.
+- roc_auc: 0.49989407937664354
+- confusion_matrix_labels: ['Approved', 'Pending']
+- confusion_matrix: [[2104, 2098], [2104, 2102]]
+
+## Billing amount prediction
+- task: Billing amount prediction
+- dataset: billing_amount_model.csv
+- target: Amount
+- rows: 5000
+- test_rows: 1000
+- selected_model: Dummy (mean)
+- validation_MAE: 71708.842758
+- candidate_validation_MAE: {'Dummy (mean)': 71708.842758, 'Decision Tree': 83120.84826349207, 'Random Forest': 73588.72327724975, 'Extra Trees': 74396.49171033333}
+- MAE: 70207.14351999998
+- RMSE: 81883.15432192486
+- R2: -0.0022884336262736227
+- MAPE_percent: 113.97018774634257
+- baseline_MAE: 70207.14351999998
+- baseline_RMSE: 81883.15432192486
+- baseline_R2: -0.0022884336262736227
+- note: Random split; assess prediction-time feature availability before interpreting.
+
+## Length of stay prediction
+- task: Length of stay prediction
+- dataset: length_of_stay_model.csv
+- target: LengthOfStayDays
+- rows: 586
+- test_rows: 118
+- selected_model: Extra Trees
+- validation_MAE: 2.2664458689458695
+- candidate_validation_MAE: {'Dummy (mean)': 2.3003384712786414, 'Decision Tree': 2.7891534391534387, 'Random Forest': 2.274482350982351, 'Extra Trees': 2.2664458689458695}
+- MAE: 2.474538606403013
+- RMSE: 3.012953773283884
+- R2: -0.15544029476217092
+- MAPE_percent: 93.6352447837264
+- baseline_MAE: 2.3533246414602345
+- baseline_RMSE: 2.816652171932027
+- baseline_R2: -0.009785222204745425
+- note: Random split; assess prediction-time feature availability before interpreting.
+
+## Patient clustering
+- task: Patient clustering
+- rows: 20000
+- clusters: 4
+- cluster_sizes: {'0': 5057, '1': 4900, '2': 4938, '3': 5105}
+- profile_file: Reports/patient_cluster_profiles.csv
+- note: Exploratory patient segments; assess stability and clinical usefulness before use.
+
+## Facility clustering\n- task: Facility clustering\n- rows: 20\n- clusters: 3\n- profile_file: Reports/facility_cluster_profiles.csv\n- report_file: Reports/Week6_Facility_Clustering_Report.txt\n- note: Exploratory direct FacilityID count clusters; similar resource counts mean clusters are driven mainly by appointment-record volume.\n\n## Tasks not honestly trainable from current labels
+- Hospital admission prediction: no reliable negative labels; do not infer non-admission from unmatched records.
+- Three-class insurance outcome: no Rejected labels in the source data.
+- Hospital admission prediction remains blocked by unreliable negative labels; facility clustering is now available as a separate exploratory analysis using direct FacilityID counts.
+- Anomaly review and permutation feature importance are documented in the existing reports. SHAP explanations are now produced by week6_shap_explainability.py; LIME is not implemented.
