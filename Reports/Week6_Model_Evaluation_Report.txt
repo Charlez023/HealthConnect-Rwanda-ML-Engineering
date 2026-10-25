@@ -182,6 +182,7 @@ Results are exploratory and should not be interpreted as clinically validated.
 - Length-of-stay results use only appointment-linked admissions, a limited subset of the available admission records.
 - Model metrics and feature-importance rankings do not establish causation or clinical usefulness.
 - Do not use these baseline models to make real patient-care, insurance, or billing decisions.
+- The length-of-stay model underperforms its baseline on the test set (MAE 2.4745 vs 2.3533; R2 -0.1554 vs -0.0098).
 
 ## Recorded target limitations
 - Task: Hospital admission classification; Status: Not labelled in this script; Limitation: Admission sheet appointment IDs overlap only partially with Appointments; unmatched records cannot safely be labelled non-admissions.
