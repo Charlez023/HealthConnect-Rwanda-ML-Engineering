@@ -1,0 +1,39 @@
+task,test,status,detail
+Data preparation,Preparation module loading,PASS,prepare_week6_datasets.py loaded successfully
+Patient satisfaction,Prepared dataset integrity,PASS,1756 records; target 'SatisfactionClass' present with no missing or non-finite values
+High-risk severity proxy,Prepared dataset integrity,PASS,5000 records; target 'HighRiskProxy' present with no missing or non-finite values
+Insurance claim outcome,Prepared dataset integrity,PASS,42036 records; target 'ClaimStatusBinary' present with no missing or non-finite values
+Billing amount,Prepared dataset integrity,PASS,5000 records; target 'Amount' present with no missing or non-finite values
+Length of stay,Prepared dataset integrity,PASS,586 records; target 'LengthOfStayDays' present with no missing or non-finite values
+Data cleaning,"Invalid values, missing targets and duplicates",PASS,Invalid ages and infinity handled; missing target removed; exact duplicate removed
+Data cleaning,Potential outlier retention,PASS,"All 5 records retained, including the extreme Amount value"
+Data cleaning,Numeric values stored as text,PASS,Invalid numeric text detected; valid numeric text preserved
+Data cleaning,Text-form infinity handling,PASS,Text-form positive and negative infinity handled correctly
+Data merging,Valid patient feature merge,PASS,Valid appointment and patient relationships merged successfully
+Data merging,Duplicate appointment key rejection,PASS,Duplicate appointment keys correctly rejected
+Patient satisfaction,Model loading,PASS,patient_satisfaction_classification__rating_derived.joblib
+Patient satisfaction,Valid input prediction,PASS,20 predictions produced
+Patient satisfaction,Unseen category handling,PASS,Tested feature: VisitType
+Patient satisfaction,Missing feature rejection,PASS,Rejected missing feature 'VisitType' (ValueError: columns are missing: {'VisitType'})
+High-risk severity proxy,Model loading,PASS,high_risk_patient_classification__severity_proxy.joblib
+High-risk severity proxy,Valid input prediction,PASS,20 predictions produced
+High-risk severity proxy,Unseen category handling,PASS,Tested feature: VisitType
+High-risk severity proxy,Missing feature rejection,PASS,Rejected missing feature 'VisitType' (ValueError: columns are missing: {'VisitType'})
+Insurance claim outcome,Model loading,PASS,insurance_claim_outcome__approved_vs_pending_alternative.joblib
+Insurance claim outcome,Valid input prediction,PASS,20 predictions produced
+Insurance claim outcome,Unseen category handling,PASS,Tested feature: Provider
+Insurance claim outcome,Missing feature rejection,PASS,Rejected missing feature 'Provider' (ValueError: columns are missing: {'Provider'})
+Billing amount,Model loading,PASS,billing_amount_prediction.joblib
+Billing amount,Valid input prediction,PASS,20 predictions produced
+Billing amount,Unseen category handling,PASS,Tested feature: VisitType
+Billing amount,Missing feature rejection,PASS,Rejected missing feature 'VisitType' (ValueError: columns are missing: {'VisitType'})
+Length of stay,Model loading,PASS,length_of_stay_prediction.joblib
+Length of stay,Valid input prediction,PASS,20 predictions produced
+Length of stay,Unseen category handling,PASS,Tested feature: VisitType
+Length of stay,Missing feature rejection,PASS,Rejected missing feature 'VisitType' (ValueError: columns are missing: {'VisitType'})
+Facility clustering,Facility dataset integrity,PASS,20 facilities; required ID and 7 numeric model features are valid
+Facility clustering,Segment dataset integrity and ID alignment,PASS,20 segment assignments; facility IDs match the clustering dataset
+Facility clustering,Saved clustering artifact loading,PASS,Saved preprocessing and KMeans components loaded without retraining
+Facility clustering,Saved model feature contract,PASS,Saved model and facility dataset agree on all 7 features
+Facility clustering,Saved preprocessing transformation,PASS,Saved preprocessor transformed 20 facilities into 7 finite features
+Facility clustering,Cluster prediction and saved-label consistency,PASS,20 valid cluster assignments; predictions match the saved FacilitySegment labels

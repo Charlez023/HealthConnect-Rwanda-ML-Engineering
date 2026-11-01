@@ -1,0 +1,18 @@
+# HealthConnect Rwanda - ML Engineering dependencies
+
+# Data processing
+numpy==2.4.6
+pandas==3.1.0
+openpyxl==3.1.5
+
+# Machine learning
+scikit-learn==1.9.1
+scipy==1.17.1
+joblib==1.6.0
+
+# Explainability and visualization
+matplotlib==3.11.2
+shap==0.51.0
+
+# Notebook support
+ipykernel==7.4.0

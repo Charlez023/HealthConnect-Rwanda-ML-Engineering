@@ -1,3 +1,4 @@
+
 """
 HealthConnect Rwanda Week 6 - targeted dataset preparation.
 Run from the project root:
@@ -12,6 +13,7 @@ Important:
 - Claims retain only observed Approved/Pending outcomes; no labels are fabricated.
 - High-risk classification is explicitly a severity-based proxy.
 """
+
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -53,10 +55,18 @@ def merge_patient_features(df, appointments, patients):
                     "HeightCm", "WeightKg", "ChronicCondition", "BMI"]
         if c in patients.columns
     ]
-    out = df.merge(appointments[appointment_cols], on="AppointmentID",
-                   how="inner", validate="many_to_one")
-    out = out.merge(patients[patient_cols], on="PatientID", how="left",
-                    validate="many_to_one")
+    out = df.merge(
+        appointments[appointment_cols],
+        on="AppointmentID",
+        how="inner",
+        validate="many_to_one"
+    )
+    out = out.merge(
+        patients[patient_cols],
+        on="PatientID",
+        how="left",
+        validate="many_to_one"
+    )
     return out
 
 
@@ -65,8 +75,36 @@ def clean_records(df, dataset_name, target=None):
     out = df.copy()
     start_rows = len(out)
 
-    # Convert +/- infinity to missing values so the training pipeline can impute
-    # feature values. Do not silently replace missing target labels.
+    # Known numeric fields must be numeric before validation. This also handles
+    # numeric values stored as text and converts unparseable values to missing.
+    numeric_fields = [
+        "Age",
+        "HeightCm",
+        "WeightKg",
+        "BMI",
+        "Amount",
+        "ClaimAmount",
+        "LengthOfStayDays",
+    ]
+
+    numeric_conversion_counts = {}
+
+    for col in numeric_fields:
+        if col in out.columns:
+            original_nonmissing = out[col].notna()
+            converted = pd.to_numeric(out[col], errors="coerce")
+
+            conversion_failures = int(
+                (original_nonmissing & converted.isna()).sum()
+            )
+
+            if conversion_failures:
+                numeric_conversion_counts[col] = conversion_failures
+
+            out[col] = converted
+
+    # Convert positive and negative infinity to missing after numeric conversion.
+    # This catches both numeric infinity and text values such as "inf".
     out = out.replace([np.inf, -np.inf], np.nan)
 
     # Correct only clearly impossible values in known numeric fields. These are
@@ -81,11 +119,14 @@ def clean_records(df, dataset_name, target=None):
         "ClaimAmount": lambda s: s < 0,
         "LengthOfStayDays": lambda s: s < 0,
     }
+
     invalid_counts = {}
+
     for col, invalid_mask in invalid_rules.items():
         if col in out.columns and pd.api.types.is_numeric_dtype(out[col]):
             mask = invalid_mask(out[col]) & out[col].notna()
             count = int(mask.sum())
+
             if count:
                 out.loc[mask, col] = np.nan
                 invalid_counts[col] = count
@@ -95,14 +136,17 @@ def clean_records(df, dataset_name, target=None):
     if "Rating" in out.columns and dataset_name == "patient_satisfaction_model.csv":
         valid = out["Rating"].isin([1, 2, 3, 4, 5])
         out = out.loc[valid].copy()
+
     if "Severity" in out.columns and dataset_name == "high_risk_severity_proxy.csv":
         valid = out["Severity"].astype(str).str.strip().str.casefold().isin(
             {"mild", "moderate", "severe"}
         )
         out = out.loc[valid].copy()
+
     if target and target in out.columns:
         out = out.loc[out[target].notna()].copy()
-        if target in out.columns and pd.api.types.is_numeric_dtype(out[target]):
+
+        if pd.api.types.is_numeric_dtype(out[target]):
             out = out.loc[np.isfinite(out[target])].copy()
 
     # Remove exact duplicate records while IDs are still present in the task
@@ -115,30 +159,42 @@ def clean_records(df, dataset_name, target=None):
     # because extreme clinical/billing values may be genuine observations.
     outlier_counts = {}
     numeric_cols = out.select_dtypes(include=["number"]).columns
+
     for col in numeric_cols:
         values = out[col].dropna()
+
         if len(values) < 4 or values.nunique() < 2:
             continue
+
         q1, q3 = values.quantile([0.25, 0.75])
         iqr = q3 - q1
+
         if pd.notna(iqr) and iqr > 0:
-            count = int(((values < q1 - 1.5 * iqr) | (values > q3 + 1.5 * iqr)).sum())
+            count = int(
+                ((values < q1 - 1.5 * iqr) |
+                 (values > q3 + 1.5 * iqr)).sum()
+            )
+
             if count:
                 outlier_counts[col] = count
 
     PREPROCESSING_NOTES.append(
         f"{dataset_name}: input_rows={start_rows}; output_rows={len(out)}; "
         f"exact_duplicates_removed={duplicates_removed}; "
+        f"numeric_conversion_failures={numeric_conversion_counts or 'none'}; "
         f"invalid_numeric_values_set_missing={invalid_counts or 'none'}; "
         f"potential_IQR_outliers_retained_for_review={outlier_counts or 'none'}"
     )
+
     return out
 
 
 def save(df, filename, description):
     path = PROCESSED / filename
     df.to_csv(path, index=False)
-    print(f"{filename}: {len(df):,} rows, {len(df.columns)} columns - {description}")
+    print(
+        f"{filename}: {len(df):,} rows, {len(df.columns)} columns - {description}"
+    )
 
 
 def save_preprocessing_summary():
@@ -149,7 +205,8 @@ def save_preprocessing_summary():
         "Missing feature values are imputed in train_week6_models.py (median for numeric, most-frequent for categorical; object missing values may be marked Unknown by clean_features).",
         "Categorical features are one-hot encoded in the model pipeline. StandardScaler is used for Logistic Regression pipelines; tree-based models are not scaled.",
         "Exact duplicate rows are removed within each task dataset before identifier columns are dropped. Rows with different event IDs are retained.",
-        "Positive and negative infinity values are converted to missing values across the dataset; rows with missing targets are excluded, while missing feature values are handled by the model pipeline imputers. Clearly impossible numeric values in documented fields are set to missing, and invalid task targets are excluded rather than fabricated.",
+        "Known numeric fields are converted to numeric values before validation. Unparseable values and positive or negative infinity are converted to missing values. Clearly impossible numeric values in documented fields are also set to missing.",
+        "Rows with missing targets are excluded, while missing feature values are handled by the model pipeline imputers. Invalid task targets are excluded rather than fabricated.",
         "Potential numerical outliers are flagged using the 1.5*IQR rule and retained for review; they are not automatically deleted because extreme clinical and billing values may be valid.",
         "Join keys are validated in merge_patient_features using many_to_one validation. Only records linked to known appointments are used for the appointment-linked tasks.",
         "Claims remain Approved/Pending only; no Rejected labels are fabricated. High-risk remains a severity-based proxy, not a clinically validated risk label.",
@@ -160,7 +217,13 @@ def save_preprocessing_summary():
         "",
         "Note: this summary records the rules applied by this script. It is not evidence of clinical validation or accounting reconciliation."
     ]
-    (REPORTS / "Week6_Preprocessing_Summary.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    (
+        REPORTS / "Week6_Preprocessing_Summary.txt"
+    ).write_text(
+        "\n".join(lines) + "\n",
+        encoding="utf-8"
+    )
 
 
 def main():
@@ -181,106 +244,206 @@ def main():
     ]
 
     # 1. Satisfaction: only feedback records linked to a known appointment.
-    # Rating mapping is documented and reproducible: 1-2 Low, 3 Medium, 4-5 High.
+    # Rating mapping: 1-2 Low, 3 Medium, 4-5 High.
     satisfaction = feedback.loc[
         feedback["AppointmentID"].isin(appointments["AppointmentID"])
     ].copy()
+
     satisfaction["SatisfactionClass"] = satisfaction["Rating"].map(
         {1: "Low", 2: "Low", 3: "Medium", 4: "High", 5: "High"}
     )
+
     satisfaction = merge_patient_features(
         satisfaction, appointments, patients
     )
+
     satisfaction = clean_records(
-        satisfaction, "patient_satisfaction_model.csv", target="SatisfactionClass"
+        satisfaction,
+        "patient_satisfaction_model.csv",
+        target="SatisfactionClass"
     )
+
     satisfaction = satisfaction.drop(
-        columns=[c for c in ["FeedbackID", "Comment", "Rating"] if c in satisfaction.columns]
+        columns=[
+            c for c in ["FeedbackID", "Comment", "Rating"]
+            if c in satisfaction.columns
+        ]
     )
-    save(satisfaction, "patient_satisfaction_model.csv",
-         "feedback linked to known appointments; rating-derived 3-class target")
+
+    save(
+        satisfaction,
+        "patient_satisfaction_model.csv",
+        "feedback linked to known appointments; rating-derived 3-class target"
+    )
 
     # 2. High-risk proxy: Severe diagnosis vs Mild/Moderate.
-    # Keep diagnosis records with a valid appointment link, and explicitly name
-    # the proxy target rather than claiming clinically validated risk.
+    # This is explicitly a severity-based proxy, not a clinical risk label.
     risk = diagnoses.loc[
         diagnoses["AppointmentID"].isin(appointments["AppointmentID"])
     ].copy()
-    risk["Severity"] = risk["Severity"].astype(str).str.strip().str.title()
-    risk = risk.loc[risk["Severity"].isin(["Mild", "Moderate", "Severe"])].copy()
-    risk["HighRiskProxy"] = (risk["Severity"] == "Severe").astype("int8")
-    risk = merge_patient_features(risk, appointments, patients)
-    risk = clean_records(risk, "high_risk_severity_proxy.csv", target="HighRiskProxy")
-    risk = risk.drop(
-        columns=[c for c in ["DiagnosisID", "Diagnosis", "Severity"] if c in risk.columns]
-    )
-    save(risk, "high_risk_severity_proxy.csv",
-         "appointment-linked diagnoses; Severe=1, Mild/Moderate=0 proxy target")
 
-    # 3. Billing amount: only bills linked to known appointments. Amount is target.
+    risk["Severity"] = risk["Severity"].astype(str).str.strip().str.title()
+    risk = risk.loc[
+        risk["Severity"].isin(["Mild", "Moderate", "Severe"])
+    ].copy()
+
+    risk["HighRiskProxy"] = (
+        risk["Severity"] == "Severe"
+    ).astype("int8")
+
+    risk = merge_patient_features(risk, appointments, patients)
+
+    risk = clean_records(
+        risk,
+        "high_risk_severity_proxy.csv",
+        target="HighRiskProxy"
+    )
+
+    risk = risk.drop(
+        columns=[
+            c for c in ["DiagnosisID", "Diagnosis", "Severity"]
+            if c in risk.columns
+        ]
+    )
+
+    save(
+        risk,
+        "high_risk_severity_proxy.csv",
+        "appointment-linked diagnoses; Severe=1, Mild/Moderate=0 proxy target"
+    )
+
+    # 3. Billing amount: only bills linked to known appointments.
     # BillingID and billing Status are excluded from predictors to reduce leakage.
     bill = billing.loc[
         billing["AppointmentID"].isin(appointments["AppointmentID"])
     ].copy()
-    bill = merge_patient_features(bill, appointments, patients)
-    bill = clean_records(bill, "billing_amount_model.csv", target="Amount")
-    bill = bill.drop(
-        columns=[c for c in ["BillingID", "Status"] if c in bill.columns]
-    )
-    save(bill, "billing_amount_model.csv",
-         "appointment-linked bills; Amount is the regression target")
 
-    # 4. Length of stay: use only admission records linked to known appointments.
+    bill = merge_patient_features(bill, appointments, patients)
+
+    bill = clean_records(
+        bill,
+        "billing_amount_model.csv",
+        target="Amount"
+    )
+
+    bill = bill.drop(
+        columns=[
+            c for c in ["BillingID", "Status"]
+            if c in bill.columns
+        ]
+    )
+
+    save(
+        bill,
+        "billing_amount_model.csv",
+        "appointment-linked bills; Amount is the regression target"
+    )
+
+    # 4. Length of stay: only admission records linked to known appointments.
     # Admission IDs are identifiers, not predictors.
     los = admissions.loc[
         admissions["AppointmentID"].isin(appointments["AppointmentID"])
     ].copy()
+
     los = merge_patient_features(los, appointments, patients)
-    los = clean_records(los, "length_of_stay_model.csv", target="LengthOfStayDays")
-    los = los.drop(columns=[c for c in ["AdmissionID"] if c in los.columns])
-    save(los, "length_of_stay_model.csv",
-         "only admissions linked to appointments; LengthOfStayDays is target")
+
+    los = clean_records(
+        los,
+        "length_of_stay_model.csv",
+        target="LengthOfStayDays"
+    )
+
+    los = los.drop(
+        columns=[
+            c for c in ["AdmissionID"]
+            if c in los.columns
+        ]
+    )
+
+    save(
+        los,
+        "length_of_stay_model.csv",
+        "only admissions linked to appointments; LengthOfStayDays is target"
+    )
 
     # 5. Claims: preserve only observed classes; this is a binary alternative,
     # not the required three-class task. Billing join is by BillingID only.
     claims_model = claims.loc[
         claims["Status"].isin(["Approved", "Pending"])
     ].copy()
+
     claims_model = claims_model.merge(
         billing[["BillingID", "Amount", "AppointmentID"]],
-        on="BillingID", how="left", validate="many_to_one"
+        on="BillingID",
+        how="left",
+        validate="many_to_one"
     )
+
     claims_model["ClaimStatusBinary"] = claims_model["Status"]
-    claims_model = clean_records(claims_model, "claims_approved_pending_alternative.csv", target="ClaimStatusBinary")
-    claims_model = claims_model.drop(
-        columns=[c for c in ["ClaimID", "BillingID", "Status"] if c in claims_model.columns]
+
+    claims_model = clean_records(
+        claims_model,
+        "claims_approved_pending_alternative.csv",
+        target="ClaimStatusBinary"
     )
-    save(claims_model, "claims_approved_pending_alternative.csv",
-         "binary alternative only; source has no Rejected labels")
+
+    claims_model = claims_model.drop(
+        columns=[
+            c for c in ["ClaimID", "BillingID", "Status"]
+            if c in claims_model.columns
+        ]
+    )
+
+    save(
+        claims_model,
+        "claims_approved_pending_alternative.csv",
+        "binary alternative only; source has no Rejected labels"
+    )
 
     # 6. Patient clustering data: one row per patient, no direct contact details.
     patient_cluster = patients[safe_patient_columns].copy()
-    patient_cluster = clean_records(patient_cluster, "patient_clustering.csv")
-    save(patient_cluster, "patient_clustering.csv",
-         "patient-level clustering features; no target label")
 
-    # 7. A record of blocked/unavailable target scope, saved for documentation.
+    patient_cluster = clean_records(
+        patient_cluster,
+        "patient_clustering.csv"
+    )
+
+    save(
+        patient_cluster,
+        "patient_clustering.csv",
+        "patient-level clustering features; no target label"
+    )
+
+    # 7. Record blocked or unavailable target scope.
     limitations = pd.DataFrame([
-        ["Hospital admission classification",
-         "Not labelled in this script",
-         "Admission sheet appointment IDs overlap only partially with Appointments; unmatched records cannot safely be labelled non-admissions."],
-        ["Insurance claim outcome (3 classes)",
-         "Not trainable with current labels",
-         "Observed claim statuses are Approved and Pending; no Rejected records were found."],
-        ["High-risk classification",
-         "Proxy target provided",
-         "Severe diagnosis is used as a transparent proxy, not a clinically validated risk label."],
-        ["Facility clustering",
-         "Requires further validation",
-         "Facility-to-department linkage rates in the audit were about 5%; avoid unsupported facility-level conclusions."],
+        [
+            "Hospital admission classification",
+            "Not labelled in this script",
+            "Admission sheet appointment IDs overlap only partially with Appointments; unmatched records cannot safely be labelled non-admissions."
+        ],
+        [
+            "Insurance claim outcome (3 classes)",
+            "Not trainable with current labels",
+            "Observed claim statuses are Approved and Pending; no Rejected records were found."
+        ],
+        [
+            "High-risk classification",
+            "Proxy target provided",
+            "Severe diagnosis is used as a transparent proxy, not a clinically validated risk label."
+        ],
+        [
+            "Facility clustering",
+            "Requires further validation",
+            "Facility-to-department linkage rates in the audit were about 5%; avoid unsupported facility-level conclusions."
+        ],
     ], columns=["Task", "Status", "Limitation"])
-    save(limitations, "week6_target_limitations.csv",
-         "records target constraints and assumptions")
+
+    save(
+        limitations,
+        "week6_target_limitations.csv",
+        "records target constraints and assumptions"
+    )
+
     save_preprocessing_summary()
 
     print("\nPreparation complete. Original datasets were not modified.")
@@ -290,5 +453,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
