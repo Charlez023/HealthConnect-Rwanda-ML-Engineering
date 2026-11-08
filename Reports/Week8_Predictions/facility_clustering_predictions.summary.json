@@ -1,0 +1,13 @@
+{
+    "task": "facility_clustering",
+    "description": "Exploratory facility segmentation",
+    "input_file": "Data\\Processed_Datasets\\facility_clustering.csv",
+    "model_artifact": "Models\\facility_clustering_kmeans.joblib",
+    "output_file": "Reports\\Week8_Predictions\\facility_clustering_predictions.csv",
+    "input_rows": 20,
+    "output_rows": 20,
+    "prediction_type": "facility_clustering",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:45:34.025169+01:00",
+    "clinical_validation": false
+}

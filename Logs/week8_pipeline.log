@@ -1,0 +1,281 @@
+2026-11-07 12:08:50,616 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:08:50,616 | INFO | Selected task: patient_satisfaction
+2026-11-07 12:08:50,678 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 12:08:55,118 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 12:08:55,174 | INFO | Input validation passed. Expected features: 13
+2026-11-07 12:08:55,514 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 12:08:55,551 | INFO | Pipeline completed successfully.
+2026-11-07 12:08:55,551 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 12:08:55,551 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 12:34:38,288 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:34:38,289 | INFO | Selected task: patient_satisfaction
+2026-11-07 12:34:38,331 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 12:34:43,532 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 12:34:43,552 | INFO | Input validation passed. Expected features: 13
+2026-11-07 12:34:44,163 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 12:34:44,196 | INFO | Pipeline completed successfully.
+2026-11-07 12:34:44,197 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 12:34:44,197 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 12:35:17,021 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:35:17,021 | INFO | Selected task: high_risk_severity_proxy
+2026-11-07 12:35:17,075 | INFO | Loaded 5000 input records from high_risk_severity_proxy.csv
+2026-11-07 12:35:20,356 | INFO | Loaded model artifact: high_risk_patient_classification__severity_proxy.joblib
+2026-11-07 12:35:20,402 | INFO | Input validation passed. Expected features: 13
+2026-11-07 12:35:20,568 | INFO | Generated 5000 predictions for high_risk_severity_proxy.
+2026-11-07 12:35:20,628 | INFO | Pipeline completed successfully.
+2026-11-07 12:35:20,628 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.csv
+2026-11-07 12:35:20,628 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.summary.json
+2026-11-07 12:35:54,412 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:35:54,414 | INFO | Selected task: insurance_claims
+2026-11-07 12:35:54,517 | INFO | Loaded 42036 input records from claims_approved_pending_alternative.csv
+2026-11-07 12:35:58,913 | INFO | Loaded model artifact: insurance_claim_outcome__approved_vs_pending_alternative.joblib
+2026-11-07 12:35:58,931 | INFO | Input validation passed. Expected features: 3
+2026-11-07 12:36:03,310 | INFO | Generated 42036 predictions for insurance_claims.
+2026-11-07 12:36:03,799 | INFO | Pipeline completed successfully.
+2026-11-07 12:36:03,799 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.csv
+2026-11-07 12:36:03,802 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.summary.json
+2026-11-07 12:36:43,888 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:36:43,888 | INFO | Selected task: billing_amount
+2026-11-07 12:36:43,937 | INFO | Loaded 5000 input records from billing_amount_model.csv
+2026-11-07 12:36:47,095 | INFO | Loaded model artifact: billing_amount_prediction.joblib
+2026-11-07 12:36:47,121 | INFO | Input validation passed. Expected features: 13
+2026-11-07 12:36:47,267 | INFO | Generated 5000 predictions for billing_amount.
+2026-11-07 12:36:47,308 | INFO | Pipeline completed successfully.
+2026-11-07 12:36:47,308 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.csv
+2026-11-07 12:36:47,310 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.summary.json
+2026-11-07 12:38:00,994 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:38:00,995 | INFO | Selected task: length_of_stay
+2026-11-07 12:38:01,033 | INFO | Loaded 586 input records from length_of_stay_model.csv
+2026-11-07 12:38:04,444 | INFO | Loaded model artifact: length_of_stay_prediction.joblib
+2026-11-07 12:38:04,464 | INFO | Input validation passed. Expected features: 13
+2026-11-07 12:38:04,715 | INFO | Generated 586 predictions for length_of_stay.
+2026-11-07 12:38:04,733 | INFO | Pipeline completed successfully.
+2026-11-07 12:38:04,734 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.csv
+2026-11-07 12:38:04,735 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.summary.json
+2026-11-07 12:38:51,072 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:38:51,073 | INFO | Selected task: patient_clustering
+2026-11-07 12:38:51,156 | INFO | Loaded 20000 input records from patient_clustering.csv
+2026-11-07 12:38:54,635 | INFO | Loaded model artifact: patient_clustering_kmeans.joblib
+2026-11-07 12:38:54,659 | INFO | Input validation passed. Expected features: 10
+2026-11-07 12:38:54,926 | INFO | Generated patient cluster assignments.
+2026-11-07 12:38:55,069 | INFO | Pipeline completed successfully.
+2026-11-07 12:38:55,069 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.csv
+2026-11-07 12:38:55,070 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.summary.json
+2026-11-07 12:39:15,016 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:39:15,016 | INFO | Selected task: facility_clustering
+2026-11-07 12:39:15,045 | INFO | Loaded 20 input records from facility_clustering.csv
+2026-11-07 12:39:18,343 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 12:39:18,477 | INFO | Generated facility cluster assignments.
+2026-11-07 12:39:18,483 | INFO | Pipeline completed successfully.
+2026-11-07 12:39:18,483 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.csv
+2026-11-07 12:39:18,484 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.summary.json
+2026-11-07 12:44:20,667 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 12:44:20,668 | INFO | Selected task: facility_clustering
+2026-11-07 12:44:20,696 | INFO | Loaded 20 input records from facility_clustering.csv
+2026-11-07 12:44:23,783 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 12:44:23,923 | INFO | Generated facility cluster assignments.
+2026-11-07 12:44:23,930 | INFO | Pipeline completed successfully.
+2026-11-07 12:44:23,930 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.csv
+2026-11-07 12:44:23,932 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.summary.json
+2026-11-07 13:10:27,545 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:10:27,560 | INFO | Selected task: patient_satisfaction
+2026-11-07 13:10:27,571 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 13:10:30,440 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 13:10:30,460 | INFO | Input validation passed. Expected features: 13
+2026-11-07 13:10:30,832 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 13:10:30,857 | INFO | Pipeline completed successfully.
+2026-11-07 13:10:30,857 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 13:10:30,857 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 13:19:23,659 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:19:23,659 | INFO | Selected task: patient_satisfaction
+2026-11-07 13:19:23,684 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 13:19:26,576 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 13:19:26,590 | INFO | Input validation passed. Expected features: 13
+2026-11-07 13:19:26,983 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 13:19:27,006 | INFO | Pipeline completed successfully.
+2026-11-07 13:19:27,006 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 13:19:27,006 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 13:23:29,879 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:23:29,879 | INFO | Selected task: high_risk_severity_proxy
+2026-11-07 13:23:29,900 | INFO | Loaded 5000 input records from high_risk_severity_proxy.csv
+2026-11-07 13:23:33,518 | INFO | Loaded model artifact: high_risk_patient_classification__severity_proxy.joblib
+2026-11-07 13:23:33,540 | INFO | Input validation passed. Expected features: 13
+2026-11-07 13:23:33,678 | INFO | Generated 5000 predictions for high_risk_severity_proxy.
+2026-11-07 13:23:33,730 | INFO | Pipeline completed successfully.
+2026-11-07 13:23:33,731 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.csv
+2026-11-07 13:23:33,731 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.summary.json
+2026-11-07 13:25:06,330 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:25:06,331 | INFO | Selected task: insurance_claims
+2026-11-07 13:25:06,379 | INFO | Loaded 42036 input records from claims_approved_pending_alternative.csv
+2026-11-07 13:25:10,540 | INFO | Loaded model artifact: insurance_claim_outcome__approved_vs_pending_alternative.joblib
+2026-11-07 13:25:10,558 | INFO | Input validation passed. Expected features: 3
+2026-11-07 13:25:15,099 | INFO | Generated 42036 predictions for insurance_claims.
+2026-11-07 13:25:15,608 | INFO | Pipeline completed successfully.
+2026-11-07 13:25:15,608 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.csv
+2026-11-07 13:25:15,609 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.summary.json
+2026-11-07 13:25:59,367 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:25:59,367 | INFO | Selected task: billing_amount
+2026-11-07 13:25:59,391 | INFO | Loaded 5000 input records from billing_amount_model.csv
+2026-11-07 13:26:02,871 | INFO | Loaded model artifact: billing_amount_prediction.joblib
+2026-11-07 13:26:02,912 | INFO | Input validation passed. Expected features: 13
+2026-11-07 13:26:02,997 | INFO | Generated 5000 predictions for billing_amount.
+2026-11-07 13:26:03,032 | INFO | Pipeline completed successfully.
+2026-11-07 13:26:03,032 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.csv
+2026-11-07 13:26:03,033 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.summary.json
+2026-11-07 13:26:23,242 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:26:23,243 | INFO | Selected task: length_of_stay
+2026-11-07 13:26:23,258 | INFO | Loaded 586 input records from length_of_stay_model.csv
+2026-11-07 13:26:26,561 | INFO | Loaded model artifact: length_of_stay_prediction.joblib
+2026-11-07 13:26:26,566 | INFO | Input validation passed. Expected features: 13
+2026-11-07 13:26:26,803 | INFO | Generated 586 predictions for length_of_stay.
+2026-11-07 13:26:26,818 | INFO | Pipeline completed successfully.
+2026-11-07 13:26:26,819 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.csv
+2026-11-07 13:26:26,820 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.summary.json
+2026-11-07 13:26:49,689 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:26:49,689 | INFO | Selected task: patient_clustering
+2026-11-07 13:26:49,766 | INFO | Loaded 20000 input records from patient_clustering.csv
+2026-11-07 13:26:53,166 | INFO | Loaded model artifact: patient_clustering_kmeans.joblib
+2026-11-07 13:26:53,179 | INFO | Input validation passed. Expected features: 10
+2026-11-07 13:26:53,438 | INFO | Generated patient cluster assignments.
+2026-11-07 13:26:53,541 | INFO | Pipeline completed successfully.
+2026-11-07 13:26:53,547 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.csv
+2026-11-07 13:26:53,554 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.summary.json
+2026-11-07 13:27:26,583 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 13:27:26,583 | INFO | Selected task: facility_clustering
+2026-11-07 13:27:26,596 | INFO | Loaded 20 input records from facility_clustering.csv
+2026-11-07 13:27:29,856 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 13:27:30,037 | INFO | Generated facility cluster assignments.
+2026-11-07 13:27:30,043 | INFO | Pipeline completed successfully.
+2026-11-07 13:27:30,043 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.csv
+2026-11-07 13:27:30,044 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.summary.json
+2026-11-07 15:00:18,534 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:00:18,534 | INFO | Selected task: billing_amount
+2026-11-07 15:00:18,596 | INFO | Loaded 5000 input records from billing_amount_model.csv
+2026-11-07 15:00:21,413 | INFO | Loaded model artifact: billing_amount_prediction.joblib
+2026-11-07 15:00:21,463 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:00:21,581 | INFO | Generated 5000 predictions for billing_amount.
+2026-11-07 15:00:21,613 | INFO | Pipeline completed successfully.
+2026-11-07 15:00:21,613 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_validation_check.csv
+2026-11-07 15:00:21,613 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_validation_check.summary.json
+2026-11-07 15:02:55,664 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:02:55,664 | INFO | Selected task: facility_clustering
+2026-11-07 15:02:55,720 | INFO | Loaded 20000 input records from patient_clustering.csv
+2026-11-07 15:02:58,704 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 15:02:58,704 | ERROR | ML pipeline execution failed: Missing facility clustering features: ['AppointmentRecords', 'DoctorRecords', 'NurseRecords', 'DepartmentRecords', 'EquipmentRecords', 'RoomRecords', 'BedRecords']
+Traceback (most recent call last):
+  File "C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\run_week8_pipeline.py", line 716, in main
+    summary = run_pipeline(
+              ^^^^^^^^^^^^^
+  File "C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\run_week8_pipeline.py", line 597, in run_pipeline
+    predictions = run_facility_clustering(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\run_week8_pipeline.py", line 477, in run_facility_clustering
+    raise ValueError(
+ValueError: Missing facility clustering features: ['AppointmentRecords', 'DoctorRecords', 'NurseRecords', 'DepartmentRecords', 'EquipmentRecords', 'RoomRecords', 'BedRecords']
+2026-11-07 15:04:31,136 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:04:31,136 | INFO | Selected task: facility_clustering
+2026-11-07 15:04:31,136 | INFO | Loaded 20 input records from facility_clustering.csv
+2026-11-07 15:04:33,874 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 15:04:33,989 | INFO | Generated facility cluster assignments.
+2026-11-07 15:04:33,989 | INFO | Pipeline completed successfully.
+2026-11-07 15:04:33,989 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_validation_check.csv
+2026-11-07 15:04:33,989 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_validation_check.summary.json
+2026-11-07 15:06:55,172 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:06:55,172 | INFO | Selected task: patient_clustering
+2026-11-07 15:06:55,203 | INFO | Loaded 20000 input records from patient_clustering.csv
+2026-11-07 15:06:57,644 | INFO | Loaded model artifact: patient_clustering_kmeans.joblib
+2026-11-07 15:06:57,660 | INFO | Input validation passed. Expected features: 10
+2026-11-07 15:06:57,819 | INFO | Generated patient cluster assignments.
+2026-11-07 15:06:57,882 | INFO | Pipeline completed successfully.
+2026-11-07 15:06:57,883 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_validation_check.csv
+2026-11-07 15:06:57,883 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_validation_check.summary.json
+2026-11-07 15:34:59,842 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:34:59,844 | INFO | Selected task: patient_satisfaction
+2026-11-07 15:34:59,867 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 15:35:03,300 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 15:35:03,323 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:35:03,743 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 15:35:03,775 | INFO | Pipeline completed successfully.
+2026-11-07 15:35:03,776 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 15:35:03,776 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 15:42:00,509 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:42:00,510 | INFO | Selected task: high_risk_severity_proxy
+2026-11-07 15:42:00,551 | INFO | Loaded 5000 input records from high_risk_severity_proxy.csv
+2026-11-07 15:42:04,183 | INFO | Loaded model artifact: high_risk_patient_classification__severity_proxy.joblib
+2026-11-07 15:42:04,216 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:42:04,366 | INFO | Generated 5000 predictions for high_risk_severity_proxy.
+2026-11-07 15:42:04,453 | INFO | Pipeline completed successfully.
+2026-11-07 15:42:04,454 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.csv
+2026-11-07 15:42:04,455 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.summary.json
+2026-11-07 15:42:27,956 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:42:27,958 | INFO | Selected task: insurance_claims
+2026-11-07 15:42:28,028 | INFO | Loaded 42036 input records from claims_approved_pending_alternative.csv
+2026-11-07 15:42:32,322 | INFO | Loaded model artifact: insurance_claim_outcome__approved_vs_pending_alternative.joblib
+2026-11-07 15:42:32,358 | INFO | Input validation passed. Expected features: 3
+2026-11-07 15:42:36,623 | INFO | Generated 42036 predictions for insurance_claims.
+2026-11-07 15:42:37,070 | INFO | Pipeline completed successfully.
+2026-11-07 15:42:37,070 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.csv
+2026-11-07 15:42:37,071 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\insurance_claims_predictions.summary.json
+2026-11-07 15:43:04,153 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:43:04,154 | INFO | Selected task: billing_amount
+2026-11-07 15:43:04,193 | INFO | Loaded 5000 input records from billing_amount_model.csv
+2026-11-07 15:43:07,936 | INFO | Loaded model artifact: billing_amount_prediction.joblib
+2026-11-07 15:43:07,986 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:43:08,080 | INFO | Generated 5000 predictions for billing_amount.
+2026-11-07 15:43:08,115 | INFO | Pipeline completed successfully.
+2026-11-07 15:43:08,116 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.csv
+2026-11-07 15:43:08,116 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\billing_amount_predictions.summary.json
+2026-11-07 15:43:35,658 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:43:35,659 | INFO | Selected task: length_of_stay
+2026-11-07 15:43:35,678 | INFO | Loaded 586 input records from length_of_stay_model.csv
+2026-11-07 15:43:38,920 | INFO | Loaded model artifact: length_of_stay_prediction.joblib
+2026-11-07 15:43:38,922 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:43:39,126 | INFO | Generated 586 predictions for length_of_stay.
+2026-11-07 15:43:39,148 | INFO | Pipeline completed successfully.
+2026-11-07 15:43:39,150 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.csv
+2026-11-07 15:43:39,151 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\length_of_stay_predictions.summary.json
+2026-11-07 15:44:04,717 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:44:04,718 | INFO | Selected task: patient_satisfaction
+2026-11-07 15:44:04,737 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 15:44:07,893 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 15:44:07,897 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:44:08,359 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 15:44:08,406 | INFO | Pipeline completed successfully.
+2026-11-07 15:44:08,407 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 15:44:08,407 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 15:44:45,311 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:44:45,311 | INFO | Selected task: high_risk_severity_proxy
+2026-11-07 15:44:45,341 | INFO | Loaded 5000 input records from high_risk_severity_proxy.csv
+2026-11-07 15:44:47,932 | INFO | Loaded model artifact: high_risk_patient_classification__severity_proxy.joblib
+2026-11-07 15:44:47,956 | INFO | Input validation passed. Expected features: 13
+2026-11-07 15:44:48,067 | INFO | Generated 5000 predictions for high_risk_severity_proxy.
+2026-11-07 15:44:48,118 | INFO | Pipeline completed successfully.
+2026-11-07 15:44:48,118 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.csv
+2026-11-07 15:44:48,119 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\high_risk_severity_proxy_predictions.summary.json
+2026-11-07 15:45:08,811 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:45:08,811 | INFO | Selected task: patient_clustering
+2026-11-07 15:45:08,858 | INFO | Loaded 20000 input records from patient_clustering.csv
+2026-11-07 15:45:11,696 | INFO | Loaded model artifact: patient_clustering_kmeans.joblib
+2026-11-07 15:45:11,716 | INFO | Input validation passed. Expected features: 10
+2026-11-07 15:45:11,915 | INFO | Generated patient cluster assignments.
+2026-11-07 15:45:11,979 | INFO | Pipeline completed successfully.
+2026-11-07 15:45:11,979 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.csv
+2026-11-07 15:45:11,979 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_clustering_predictions.summary.json
+2026-11-07 15:45:31,049 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 15:45:31,049 | INFO | Selected task: facility_clustering
+2026-11-07 15:45:31,065 | INFO | Loaded 20 input records from facility_clustering.csv
+2026-11-07 15:45:33,900 | INFO | Loaded model artifact: facility_clustering_kmeans.joblib
+2026-11-07 15:45:34,025 | INFO | Generated facility cluster assignments.
+2026-11-07 15:45:34,025 | INFO | Pipeline completed successfully.
+2026-11-07 15:45:34,025 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.csv
+2026-11-07 15:45:34,042 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\facility_clustering_predictions.summary.json
+2026-11-07 16:33:58,545 | INFO | Starting Week 8 ML pipeline.
+2026-11-07 16:33:58,546 | INFO | Selected task: patient_satisfaction
+2026-11-07 16:33:58,596 | INFO | Loaded 1756 input records from patient_satisfaction_model.csv
+2026-11-07 16:34:01,942 | INFO | Loaded model artifact: patient_satisfaction_classification__rating_derived.joblib
+2026-11-07 16:34:01,998 | INFO | Input validation passed. Expected features: 13
+2026-11-07 16:34:02,425 | INFO | Generated 1756 predictions for patient_satisfaction.
+2026-11-07 16:34:02,458 | INFO | Pipeline completed successfully.
+2026-11-07 16:34:02,458 | INFO | Prediction output: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.csv
+2026-11-07 16:34:02,458 | INFO | Execution summary: C:\Users\USER\Documents\HealthConnect-Rwanda-ML-Engineering\Reports\Week8_Predictions\patient_satisfaction_predictions.summary.json
+2026-11-07 18:31:35,497 | INFO | Logging configuration verified.

@@ -1,0 +1,13 @@
+{
+    "task": "high_risk_severity_proxy",
+    "description": "Severity-based high-risk proxy classification",
+    "input_file": "Data\\Processed_Datasets\\high_risk_severity_proxy.csv",
+    "model_artifact": "Models\\high_risk_patient_classification__severity_proxy.joblib",
+    "output_file": "Reports\\Week8_Predictions\\high_risk_severity_proxy_predictions.csv",
+    "input_rows": 5000,
+    "output_rows": 5000,
+    "prediction_type": "classification",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:44:48.117851+01:00",
+    "clinical_validation": false
+}

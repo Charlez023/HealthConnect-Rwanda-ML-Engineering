@@ -1,0 +1,13 @@
+{
+    "task": "patient_satisfaction",
+    "description": "Rating-derived patient satisfaction classification",
+    "input_file": "Data\\Processed_Datasets\\patient_satisfaction_model.csv",
+    "model_artifact": "Models\\patient_satisfaction_classification__rating_derived.joblib",
+    "output_file": "Reports\\Week8_Predictions\\patient_satisfaction_predictions.csv",
+    "input_rows": 1756,
+    "output_rows": 1756,
+    "prediction_type": "classification",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T16:34:02.458630+01:00",
+    "clinical_validation": false
+}

@@ -1,0 +1,13 @@
+{
+    "task": "patient_clustering",
+    "description": "Exploratory patient segmentation",
+    "input_file": "Data\\Processed_Datasets\\patient_clustering.csv",
+    "model_artifact": "Models\\patient_clustering_kmeans.joblib",
+    "output_file": "Reports\\Week8_Predictions\\patient_clustering_validation_check.csv",
+    "input_rows": 20000,
+    "output_rows": 20000,
+    "prediction_type": "clustering",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:06:57.881456+01:00",
+    "clinical_validation": false
+}

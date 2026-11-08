@@ -1,0 +1,13 @@
+{
+    "task": "length_of_stay",
+    "description": "Length of stay prediction",
+    "input_file": "Data\\Processed_Datasets\\length_of_stay_model.csv",
+    "model_artifact": "Models\\length_of_stay_prediction.joblib",
+    "output_file": "Reports\\Week8_Predictions\\length_of_stay_predictions.csv",
+    "input_rows": 586,
+    "output_rows": 586,
+    "prediction_type": "regression",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:43:39.147214+01:00",
+    "clinical_validation": false
+}

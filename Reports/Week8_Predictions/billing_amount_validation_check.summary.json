@@ -1,0 +1,13 @@
+{
+    "task": "billing_amount",
+    "description": "Billing amount prediction",
+    "input_file": "Data\\Processed_Datasets\\billing_amount_model.csv",
+    "model_artifact": "Models\\billing_amount_prediction.joblib",
+    "output_file": "Reports\\Week8_Predictions\\billing_amount_validation_check.csv",
+    "input_rows": 5000,
+    "output_rows": 5000,
+    "prediction_type": "regression",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:00:21.613028+01:00",
+    "clinical_validation": false
+}

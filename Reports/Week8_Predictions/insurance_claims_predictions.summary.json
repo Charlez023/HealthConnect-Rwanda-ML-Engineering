@@ -1,0 +1,13 @@
+{
+    "task": "insurance_claims",
+    "description": "Approved versus Pending claims alternative",
+    "input_file": "Data\\Processed_Datasets\\claims_approved_pending_alternative.csv",
+    "model_artifact": "Models\\insurance_claim_outcome__approved_vs_pending_alternative.joblib",
+    "output_file": "Reports\\Week8_Predictions\\insurance_claims_predictions.csv",
+    "input_rows": 42036,
+    "output_rows": 42036,
+    "prediction_type": "classification",
+    "execution_status": "SUCCESS",
+    "timestamp": "2026-11-07T15:42:37.068743+01:00",
+    "clinical_validation": false
+}

@@ -1,204 +1,286 @@
 # HealthConnect Rwanda - Machine Learning Engineering
 
 **Project:** AI-Powered Clinical Risk Prediction and Healthcare Intelligence System
-**Programme:** AnalystLab Africa Experience Lab - Machine Learning Engineering.
 
-## Project Overview
+**Programme:** AnalystLab Africa Experience Lab
 
-This project addresses the Week 6 and Week 7 Machine Learning Engineering requirements in the supplied assignment PDFs.
+**Track:** Machine Learning Engineering
 
-Week 6 covered data preparation and feature engineering, classification and regression tasks, patient and facility clustering, anomaly detection, explainable AI, model comparison, and a proposed deployment architecture.
+## 1. Project Overview
 
-Week 7 focused on testing and improving the reliability of the existing ML pipeline through data-processing validation, preprocessing checks, model integration testing, error handling, dependency verification, and cross-track validation.
+HealthConnect Rwanda is a machine learning engineering project focused on developing exploratory healthcare prediction and intelligence solutions using the supplied healthcare datasets.
 
-The models and findings are exploratory. Their results should be interpreted alongside the documented data limitations and evaluation metrics; they are not evidence of clinically validated prediction performance.
+The project covers three phases:
 
-## Project Structure
+- **Week 6:** Data preparation, feature engineering, model training, evaluation, clustering and explainability.
+- **Week 7:** Pipeline testing, reliability improvements and cross-track validation.
+- **Week 8:** Integration of saved machine learning models into a reusable prediction pipeline with logging, error handling and reproducibility.
 
-- `Data/Original_Datasets/` - original supplied CSV and Excel files; preserve these unchanged.
-- `Data/Processed_Datasets/` - cleaned and feature-engineered datasets.
-- `Notebook/` - the Week 6 machine learning notebook.
-- `Models/` - trained model artifacts, where applicable.
-- `Reports/` - data readiness, model evaluation, model comparison, explainability, anomaly detection, clustering, deployment architecture, and Week 7 testing reports.
-- `Presentation/` - project presentation.
-- `App/` - application files, if included in the deliverables.
-- `References/` - supplied assignment PDFs.
-- `requirements.txt` - project Python dependencies.
-- `test_week7_pipeline.py` - targeted Week 7 pipeline test script.
+The objective is to establish a structured and reproducible machine learning workflow that supports model execution, prediction generation, evaluation and engineering handover.
 
-## Data Readiness and Limitations
+## 2. Project Structure
 
-The `Reports/Data_Readiness_Audit.txt` report documents the main constraints identified during data inspection:
+| Directory/File | Description |
+|---|---|
+| `Data/Original_Datasets/` | Original healthcare datasets, preserved unchanged. |
+| `Data/Processed_Datasets/` | Prepared datasets for modelling and prediction. |
+| `Notebook/` | Week 6 machine learning notebook. |
+| `Models/` | Saved machine learning model artifacts. |
+| `Reports/` | Evaluation, explainability, clustering, testing and prediction reports. |
+| `Logs/` | Pipeline execution logs. |
+| `Presentation/` | Project presentation materials. |
+| `App/` | Application files, where included. |
+| `References/` | Supplied assignment PDFs. |
+| `prepare_week6_datasets.py` | Dataset preparation script. |
+| `train_week6_models.py` | Model training and comparison script. |
+| `run_week8_pipeline.py` | Integrated prediction pipeline. |
+| `test_week7_pipeline.py` | Week 7 pipeline test script. |
+| `requirements.txt` | Project dependencies. |
 
-- Only 586 admission records link to the 5,000 available appointment records.
-- Claims contain Approved and Pending labels, but no Rejected class.
-- Facility and department relationships are weak, with matches in only about 5% of comparable records.
-- Bed records are marked Available, and equipment availability status is not supplied.
-- Billing, payment, and revenue-summary totals do not reconcile directly.
-- Appointment references and feedback records have limited linkage.
+## 3. Data Preparation and Limitations
 
-These constraints affect which prediction tasks can be supported and how results should be interpreted. Hospital admission prediction and three-class claims prediction cannot be reliably trained without suitable labels.
+The original datasets were preserved, and separate prepared datasets were generated for machine learning tasks.
 
-Do not fabricate admission outcomes, rejected claims, facility names or attributes, ownership, locations, bed occupancy, or equipment availability.
+Data inspection identified several limitations affecting model development and interpretation:
 
-## Machine Learning and Evaluation
+- **Insurance claims:** The original dataset contains only Approved and Pending statuses. No Rejected class is available. Therefore, the project uses a binary Approved-versus-Pending classification alternative.
+- **High-risk classification:** Diagnosis severity is used as a proxy target, with Severe represented as the positive class and Mild/Moderate as the negative class. This is not a clinically validated risk outcome.
+- **Patient satisfaction:** Available patient rating data is used as the prediction target.
+- **Length of stay:** Only 586 admission records could be linked to the available appointment records.
+- **Facility relationships:** Weak relationships between facility and department records limit reliable joins and analysis.
+- **Other operational data:** Bed records are marked Available, and sufficient equipment availability information is not supplied.
 
-The project includes classification and regression tasks, patient clustering, facility clustering, anomaly analysis, and model explainability. Evaluation reports and metrics should be used to compare model performance against appropriate baselines.
+These limitations affect the completeness and predictive reliability of the resulting models. Missing outcomes and unsupported labels were not artificially generated.
 
-Some models perform close to or worse than their baselines. These results should be reported honestly rather than presented as successful predictive systems. The high-risk task uses a constructed severity proxy and must not be described as a clinically validated risk outcome.
+Original datasets remain separate from the processed modelling datasets.
 
-## Facility Clustering
+Further details are documented in `Reports/Data_Readiness_Audit.txt`.
 
-The facility clustering workflow uses direct `FacilityID`-level record counts and the `RoomID`-to-room relationship for bed counts. It avoids unreliable appointment-to-department joins and does not infer missing facility attributes.
+## 4. Machine Learning and Evaluation
 
-The exploratory analysis produces three facility clusters and their profiles. Because resource counts are similar across many facilities, the clusters largely reflect differences in appointment volume and should not be interpreted as measures of facility quality or clinical performance.
+The Week 6 modelling workflow covers:
 
-To regenerate the facility clustering outputs, run this command from the project root if the script and its dependencies are available:
+- Classification and regression.
+- Patient clustering and facility clustering.
+- Model comparison against baseline models.
+- Permutation feature importance.
+- SHAP explainability.
+- Anomaly detection and review.
 
-```bash
-python build_week6_facility_clustering.py
-```
+The facility clustering workflow uses direct `FacilityID`-level record counts and the `RoomID`-to-room relationship for bed counts. It produces three exploratory clusters, largely reflecting differences in appointment volume rather than facility quality.
 
-## Explainable AI and Anomaly Analysis
+Explainability findings describe model behaviour and feature relationships, not causation. Detected anomalies require contextual review and should not automatically be interpreted as errors or fraudulent activity.
 
-The project includes permutation feature importance and SHAP explainability work to examine how features influence model outputs. The findings describe model behaviour, not causation. Feature importance from weak models should be treated as exploratory, and explanations do not establish clinical relevance.
+Model evaluation results and supporting analysis are available in the `Reports/` directory.
 
-The high-risk target is a constructed severity proxy, not a validated clinical outcome. Explainability results should therefore be interpreted with this limitation in mind.
+Some models perform close to or worse than their baseline alternatives. These results are documented transparently rather than presented as evidence of successful predictive performance.
 
-The project also includes anomaly analysis to identify unusual patterns in the available data. Such patterns require contextual review and should not automatically be treated as errors, fraud, or clinical problems.
+## 5. Week 7 - Testing and Reliability
 
-### SHAP Workflow
+Week 7 focused on validating and improving the existing machine learning pipeline.
 
-If the SHAP script is present in the project, run it from the project root:
+Testing covered data preparation, numeric conversion, missing values, duplicates, data merging, preprocessing compatibility, saved model loading, prediction generation and facility clustering.
 
-```bash
-python week6_shap_explainability.py
-```
+### Verified improvement
 
-The required packages are included in `requirements.txt`. If they are not installed in the active Python environment, install the project dependencies as described below.
+The `clean_records()` function in `prepare_week6_datasets.py` was improved to:
 
-The documented outputs are:
+- Convert numeric values stored as text using `pd.to_numeric(..., errors="coerce")`.
+- Handle positive and negative infinity.
+- Record numeric conversion failures.
 
-- `Reports/Week6_SHAP_Explainability_Report.txt`
-- `Reports/Week6_SHAP_Feature_Importance.csv`
-- `Reports/Week6_SHAP_Feature_Importance.png`
-- `Reports/Week6_SHAP_Individual_Explanations.csv`
+The prepared datasets were regenerated, and the affected tests passed successfully without changing their previous row counts.
 
-These output paths apply when the script generates the corresponding files successfully.
+### Test results
 
-## Week 7 - ML Pipeline Testing and Reliability
+| Test result | Count |
+|---|---:|
+| Total checks | 38 |
+| Passed | 38 |
+| Failed | 0 |
+| Not applicable | 0 |
 
-Week 7 focused on validating the existing Week 6 pipeline rather than rebuilding or retraining the models.
+Run the test suite from the project root:
 
-The testing covered:
-
-- Data preparation and prepared dataset target integrity.
-- Data cleaning, missing values, invalid numeric values, duplicates, and outlier retention.
-- Numeric values stored as text and positive or negative infinity.
-- Data merging and duplicate appointment-key handling.
-- Loading and testing saved classification and regression pipelines.
-- Valid predictions, unseen categorical values, and missing-feature handling.
-- Facility clustering dataset integrity, feature compatibility, preprocessing, and predictions.
-
-### Verified Improvement
-
-Testing identified an issue in the data-cleaning process involving numeric values stored as text. The `clean_records()` function in `prepare_week6_datasets.py` was updated to convert the relevant numeric fields using `pd.to_numeric(..., errors="coerce")`, handle positive and negative infinity, and record numeric conversion failures.
-
-The prepared datasets were regenerated, and the affected tests were rerun successfully. Their row counts remained consistent with the previous preparation run.
-
-### Pipeline Test Results
-
-The final test run recorded:
-
-- Total checks: 38
-- Passed: 38
-- Failed: 0
-- Not applicable: 0
-
-The test suite is available in:
-
-```bash
+```powershell
 python test_week7_pipeline.py
 ```
 
-The generated evidence files are:
+**Evidence files:**
 
 - `Reports/Week7_ML_Pipeline_Test_Results.csv`
 - `Reports/Week7_ML_Pipeline_Test_Summary.json`
+- `Reports/Week7_ML_Pipeline_Testing_and_Reliability_Report.md`
 
-The tests validate the selected pipeline components and saved artifacts. They do not establish clinical validity or guarantee that every possible input condition has been covered.
+### HC-POD Cross-Track Validation
 
-## Dependency Management and Reproducibility
+Week 7 also included independent validation of findings from the Data Analytics track.
 
-The project uses Python 3.11.9. Its third-party dependencies are documented in the root-level `requirements.txt` file.
+Key findings included:
 
-To install the listed dependencies in an active Python environment:
+- The insurance claims dataset contains 21,028 Pending and 21,008 Approved records, with no Rejected records.
+- Only 5,000 of 60,000 billing records linked to available appointments.
+- Only 1,756 of 21,064 feedback records linked to available appointments.
+- Linked facility rating averages ranged from approximately 2.76 to 3.19.
+- ANOVA and Kruskal-Wallis tests did not provide statistically significant evidence of differences in facility ratings.
 
-```bash
+These findings do not provide sufficient evidence to rank facilities by patient satisfaction.
+
+The reported dashboard correction involving readmission counts could not be independently verified using the supplied source-data archive.
+
+Detailed findings are available in `Reports/Week7_Cross_Track_Testing_Evidence.md`.
+
+## 6. Week 8 - Integrated Prediction Pipeline
+
+Week 8 delivered a reusable prediction pipeline that integrates the available saved model artifacts and supports seven prediction tasks.
+
+The pipeline uses existing trained models. It does not retrain models or modify original datasets during prediction execution.
+
+### Setup
+
+The project uses Python 3.11.9.
+
+Create a virtual environment:
+
+```powershell
+python -m venv .venv
+```
+
+Activate the environment:
+
+```powershell
+.venv\Scripts\activate
+```
+
+Install dependencies:
+
+```powershell
 python -m pip install -r requirements.txt
 ```
 
-To check installed dependency compatibility:
+Check package compatibility:
 
-```bash
+```powershell
 python -m pip check
 ```
 
-The recorded dependency check returned:
+### Supported prediction tasks
 
-```text
-No broken requirements found.
+| Task | Prepared input dataset | Records |
+|---|---|---:|
+| `patient_satisfaction` | `patient_satisfaction_model.csv` | 1,756 |
+| `high_risk_severity_proxy` | `high_risk_severity_proxy.csv` | 5,000 |
+| `insurance_claims` | `claims_approved_pending_alternative.csv` | 42,036 |
+| `billing_amount` | `billing_amount_model.csv` | 5,000 |
+| `length_of_stay` | `length_of_stay_model.csv` | 586 |
+| `patient_clustering` | `patient_clustering.csv` | 20,000 |
+| `facility_clustering` | `facility_clustering.csv` | 20 |
+
+All input datasets are located in `Data/Processed_Datasets/`.
+
+### Running predictions
+
+Execute the following command from the project root:
+
+```powershell
+python run_week8_pipeline.py --task TASK_NAME --input INPUT_FILE
 ```
 
-A clean installation test in a fresh environment has not yet been performed. Therefore, the dependency check should not be interpreted as proof of complete fresh-environment reproducibility.
+Example:
 
-## HC-POD Cross-Track Validation
+```powershell
+python run_week8_pipeline.py --task patient_satisfaction --input Data/Processed_Datasets/patient_satisfaction_model.csv
+```
 
-Week 7 included cross-track testing using findings from the Data Analytics track.
+An optional output location can be specified using `--output`.
 
-The review independently confirmed:
+### Prediction outputs
 
-- The claims dataset contains 21,028 Pending and 21,008 Approved records, with no Rejected records.
-- Of 60,000 billing records, 5,000 link to the available appointment records, leaving 55,000 unmatched (91.67%).
-- Of 21,064 feedback records, 1,756 link to the available appointment records.
-- The linked facility rating averages range from approximately 2.76 to 3.19.
-- The ANOVA and Kruskal-Wallis tests did not provide statistically significant evidence of differences in facility ratings.
+Prediction CSV files and their corresponding JSON execution summaries are saved in:
 
-These results do not support ranking facilities by satisfaction ratings. The reported dashboard correction involving readmission counts was recorded as an external finding but could not be independently verified using the supplied source-data archive.
+`Reports/Week8_Predictions/`
 
-Detailed methods and results are documented in:
+The execution summaries record:
 
-`Reports/Week7_Cross_Track_Testing_Evidence.md`
+- Selected prediction task.
+- Input and output record counts.
+- Model artifact used.
+- Prediction type.
+- Execution status.
+- Execution timestamp.
+- Clinical validation status.
 
-## Week 7 Documentation and Evidence
+All seven supported prediction tasks completed successfully. Their generated prediction record counts matched the corresponding input record counts.
 
-The Week 7 reports include:
+## 7. Reproducibility, Logging and Error Handling
 
-- `Reports/Week7_ML_Pipeline_Testing_and_Reliability_Report.md` - testing scope, methods, improvements, results, dependencies, and remaining limitations.
-- `Reports/Week7_Project_Summary.md` - summary of the Week 7 work and outcomes.
-- `Reports/Week7_Cross_Track_Testing_Evidence.md` - independently verified cross-track findings and their implications.
-- `Reports/Week7_ML_Pipeline_Test_Results.csv` - individual test results.
-- `Reports/Week7_ML_Pipeline_Test_Summary.json` - test execution summary.
+The model training workflow uses a fixed random state of `42` for reproducibility across supported stochastic operations and data splits.
 
-## Proposed Deployment Architecture
+The installed Python environment and package versions were verified against `requirements.txt`. Package compatibility was also checked using `pip check`.
 
-The deployment architecture is a conceptual proposal, not a deployed clinical application. A future implementation could connect hospital systems to a web dashboard and API, validate incoming data, apply preprocessing and trained models, return predictions with explanations, and route results for human review.
+An isolated temporary virtual environment was used to verify that:
 
-Before deployment, the system would require stronger data relationships, suitable outcome labels, further validation, privacy and security review, monitoring, and appropriate clinical and organisational approval. Predictions should support qualified human review rather than replace professional judgement.
+- Saved model artifacts could be loaded successfully.
+- The integrated pipeline could execute independently of the original development environment.
+- All seven prediction tasks completed successfully.
+- Expected prediction record counts were generated.
+- Execution summaries were produced.
 
-## Responsible AI and Working Rules
+The Week 8 pipeline incorporates the following engineering safeguards:
 
-1. Keep the original datasets unchanged.
-2. Build only what the assignment requires.
-3. Avoid unnecessary tests, redundant experiments, and duplicate deliverables.
-4. Use task-specific modelling datasets and valid joins.
-5. Distinguish verified results, assumptions, constructed proxies, and limitations.
-6. Do not claim a task is complete until its required output has been produced and checked.
-7. Protect patient confidentiality and assess potential bias before any real-world use.
-8. Do not use exploratory predictions as the sole basis for clinical or operational decisions.
+- Input file and model artifact validation.
+- Required feature validation.
+- Prediction and output record-count checks.
+- Output path validation.
+- Execution logging and error reporting.
+- Console logging fallback when file-logging setup fails.
+- Exception handling for unexpected execution failures.
 
-## Conclusion
+Execution logs are stored in:
 
-This project demonstrates a machine learning engineering workflow using the supplied HealthConnect Rwanda datasets. Week 6 established the data preparation, modelling, evaluation, clustering, and explainability workflows. Week 7 strengthened the reliability of the existing pipeline through targeted testing, a verified data-cleaning improvement, dependency checks, and cross-track validation.
+`Logs/week8_pipeline.log`
 
-The final test run recorded 38 passed checks and no failures. The project's remaining data and modelling limitations have also been documented to support responsible interpretation and future improvements. Further data improvements and validation are necessary before the models could be considered for real-world healthcare use.
+These measures improve execution reliability, traceability and reproducibility across supported prediction tasks.
+
+## 8. Responsible AI and Deployment Considerations
+
+The project uses supplied synthetic or educational healthcare data. Its models are intended for learning, analysis, engineering development and demonstration.
+
+Successful pipeline execution and reproducibility do not establish predictive accuracy, clinical reliability or suitability for real-world healthcare decisions.
+
+The following principles guided the project:
+
+1. Preserve original datasets.
+2. Use valid joins and task-specific modelling datasets.
+3. Avoid fabricated labels and unsupported assumptions.
+4. Distinguish verified findings from proxies and documented limitations.
+5. Consider patient confidentiality, data protection and potential model bias.
+6. Do not use exploratory predictions as the sole basis for clinical or operational decisions.
+
+### Proposed Deployment Architecture
+
+The proposed deployment architecture is conceptual and is not an implemented clinical application.
+
+A potential deployment workflow could connect hospital systems to a web dashboard and API, validate incoming data, apply preprocessing and trained models, return predictions with explanations, and route results for human review.
+
+The current engineering package establishes the reusable prediction pipeline and supporting model artifacts for demonstration. The project does not claim a production clinical deployment.
+
+### Data Science Model Coordination
+
+No separate final model artifact was supplied by the Data Science track for the Week 8 integration.
+
+The ML Engineering pipeline therefore integrates the available saved model artifacts for all seven supported prediction tasks. The integrated workflow, its model inputs, prediction outputs and engineering validation are documented in this repository.
+
+This handover accurately reflects the available model artifacts and the engineering integration completed. It does not claim receipt, approval or direct participation by the Data Science track in the final integration.
+
+## 9. Conclusion
+
+The HealthConnect Rwanda ML Engineering project establishes a structured workflow covering data preparation, model development, evaluation, pipeline testing and integrated prediction execution.
+
+Week 6 delivered the modelling, evaluation, clustering and explainability workflows. Week 7 strengthened pipeline reliability through targeted testing, data-cleaning improvements and cross-track validation. Week 8 delivered a reusable prediction pipeline supporting seven tasks, with logging, error handling, output validation and clean-environment reproducibility.
+
+The Week 7 test suite recorded 38 passing checks with no failures. All seven Week 8 prediction tasks also completed successfully during clean-environment reproducibility validation, with matching input and output record counts.
+
+The completed engineering package is ready for handover and demonstration within its documented scope.
+
+The models remain provisional and are not clinically validated. Their predictions must not be treated as established clinical outcomes or used as the sole basis for real-world healthcare decisions.
