@@ -6,6 +6,8 @@
 
 **Track:** Machine Learning Engineering
 
+---
+
 ## 1. Project Overview
 
 HealthConnect Rwanda is a machine learning engineering project focused on developing exploratory healthcare prediction and intelligence solutions using the supplied healthcare datasets.
@@ -14,9 +16,11 @@ The project covers three phases:
 
 - **Week 6:** Data preparation, feature engineering, model training, evaluation, clustering and explainability.
 - **Week 7:** Pipeline testing, reliability improvements and cross-track validation.
-- **Week 8:** Integration of saved machine learning models into a reusable prediction pipeline with logging, error handling and reproducibility.
+- **Week 8:** Integration of available saved machine learning models into a reusable prediction pipeline with logging, error handling and reproducibility documentation.
 
-The objective is to establish a structured and reproducible machine learning workflow that supports model execution, prediction generation, evaluation and engineering handover.
+The objective is to establish a structured machine learning workflow that supports model execution, prediction generation, evaluation, traceability and engineering handover.
+
+The resulting engineering package provides a foundation for demonstrating how machine learning workflows can support healthcare intelligence while maintaining transparency about data quality, model limitations and responsible use.
 
 ## 2. Project Structure
 
@@ -35,7 +39,7 @@ The objective is to establish a structured and reproducible machine learning wor
 | `train_week6_models.py` | Model training and comparison script. |
 | `run_week8_pipeline.py` | Integrated prediction pipeline. |
 | `test_week7_pipeline.py` | Week 7 pipeline test script. |
-| `requirements.txt` | Project dependencies. |
+| `requirements.txt` | Project dependencies and pinned package versions. |
 
 ## 3. Data Preparation and Limitations
 
@@ -54,7 +58,9 @@ These limitations affect the completeness and predictive reliability of the resu
 
 Original datasets remain separate from the processed modelling datasets.
 
-Further details are documented in `Reports/Data_Readiness_Audit.txt`.
+Further details are documented in:
+
+`Reports/Data_Readiness_Audit.txt`
 
 ## 4. Machine Learning and Evaluation
 
@@ -75,13 +81,15 @@ Model evaluation results and supporting analysis are available in the `Reports/`
 
 Some models perform close to or worse than their baseline alternatives. These results are documented transparently rather than presented as evidence of successful predictive performance.
 
+The models are exploratory and should not be interpreted as clinically validated prediction systems.
+
 ## 5. Week 7 - Testing and Reliability
 
 Week 7 focused on validating and improving the existing machine learning pipeline.
 
 Testing covered data preparation, numeric conversion, missing values, duplicates, data merging, preprocessing compatibility, saved model loading, prediction generation and facility clustering.
 
-### Verified improvement
+### 5.1 Verified Improvement
 
 The `clean_records()` function in `prepare_week6_datasets.py` was improved to:
 
@@ -91,7 +99,7 @@ The `clean_records()` function in `prepare_week6_datasets.py` was improved to:
 
 The prepared datasets were regenerated, and the affected tests passed successfully without changing their previous row counts.
 
-### Test results
+### 5.2 Test Results
 
 | Test result | Count |
 |---|---:|
@@ -112,9 +120,9 @@ python test_week7_pipeline.py
 - `Reports/Week7_ML_Pipeline_Test_Summary.json`
 - `Reports/Week7_ML_Pipeline_Testing_and_Reliability_Report.md`
 
-### HC-POD Cross-Track Validation
+### 5.3 HC-POD Cross-Track Validation
 
-Week 7 also included independent validation of findings from the Data Analytics track.
+Week 7 also included independent validation of findings from the Data Analytics track as part of the broader HC-POD integration work.
 
 Key findings included:
 
@@ -128,7 +136,9 @@ These findings do not provide sufficient evidence to rank facilities by patient 
 
 The reported dashboard correction involving readmission counts could not be independently verified using the supplied source-data archive.
 
-Detailed findings are available in `Reports/Week7_Cross_Track_Testing_Evidence.md`.
+Detailed findings are available in:
+
+`Reports/Week7_Cross_Track_Testing_Evidence.md`
 
 ## 6. Week 8 - Integrated Prediction Pipeline
 
@@ -136,35 +146,39 @@ Week 8 delivered a reusable prediction pipeline that integrates the available sa
 
 The pipeline uses existing trained models. It does not retrain models or modify original datasets during prediction execution.
 
-### Setup
+### 6.1 Environment Setup
 
 The project uses Python 3.11.9.
 
-Create a virtual environment:
+Create a virtual environment from the project root:
 
 ```powershell
 python -m venv .venv
 ```
 
-Activate the environment:
+Activate the environment in PowerShell:
 
 ```powershell
-.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 ```
 
-Install dependencies:
+Install the project dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-Check package compatibility:
+Check installed package compatibility:
 
 ```powershell
 python -m pip check
 ```
 
-### Supported prediction tasks
+The `requirements.txt` file contains the project's pinned package versions.
+
+### 6.2 Supported Prediction Tasks
+
+The integrated pipeline supports the following seven prediction tasks:
 
 | Task | Prepared input dataset | Records |
 |---|---|---:|
@@ -176,9 +190,11 @@ python -m pip check
 | `patient_clustering` | `patient_clustering.csv` | 20,000 |
 | `facility_clustering` | `facility_clustering.csv` | 20 |
 
-All input datasets are located in `Data/Processed_Datasets/`.
+All prepared input datasets are located in:
 
-### Running predictions
+`Data/Processed_Datasets/`
+
+### 6.3 Running Predictions
 
 Execute the following command from the project root:
 
@@ -194,7 +210,7 @@ python run_week8_pipeline.py --task patient_satisfaction --input Data/Processed_
 
 An optional output location can be specified using `--output`.
 
-### Prediction outputs
+### 6.4 Prediction Outputs
 
 Prediction CSV files and their corresponding JSON execution summaries are saved in:
 
@@ -210,37 +226,86 @@ The execution summaries record:
 - Execution timestamp.
 - Clinical validation status.
 
-All seven supported prediction tasks completed successfully. Their generated prediction record counts matched the corresponding input record counts.
+All seven supported prediction tasks completed successfully during the recorded Week 8 pipeline execution.
+
+Their generated prediction record counts matched the corresponding input record counts.
+
+### 6.5 Integrated Pipeline Workflow
+
+The integrated prediction workflow follows this general sequence:
+
+1. Receive the selected prediction task and input dataset.
+2. Validate the input file and required model artifact.
+3. Load the corresponding saved model.
+4. Validate the required input features.
+5. Apply the preprocessing and prediction workflow.
+6. Generate predictions or clustering results.
+7. Validate prediction output counts.
+8. Save prediction results and execution summaries.
+9. Record execution information and errors in the pipeline logs.
+
+This workflow provides a reusable engineering structure for executing the available machine learning models.
 
 ## 7. Reproducibility, Logging and Error Handling
 
-The model training workflow uses a fixed random state of `42` for reproducibility across supported stochastic operations and data splits.
+### 7.1 Reproducibility
 
-The installed Python environment and package versions were verified against `requirements.txt`. Package compatibility was also checked using `pip check`.
+The project includes documented environment setup instructions, pinned dependencies in `requirements.txt`, saved model artifacts and a reusable prediction pipeline.
 
-An isolated temporary virtual environment was used to verify that:
+The model training workflow defines a fixed random state of `42` for supported stochastic operations and data splits where the value is applied. This helps improve reproducibility but does not guarantee identical results across different software environments.
 
-- Saved model artifacts could be loaded successfully.
-- The integrated pipeline could execute independently of the original development environment.
-- All seven prediction tasks completed successfully.
-- Expected prediction record counts were generated.
-- Execution summaries were produced.
+The project provides the following resources for reproducing the workflow:
 
-The Week 8 pipeline incorporates the following engineering safeguards:
+- Python environment setup instructions.
+- Dependency installation instructions.
+- Saved model artifacts.
+- Prepared input datasets.
+- A reusable integrated prediction script.
+- Defined prediction task names and input paths.
+- Execution logs.
+- Prediction CSV files and JSON execution summaries.
 
-- Input file and model artifact validation.
-- Required feature validation.
-- Prediction and output record-count checks.
-- Output path validation.
-- Execution logging and error reporting.
-- Console logging fallback when file-logging setup fails.
-- Exception handling for unexpected execution failures.
+The Week 8 pipeline was successfully executed across all seven supported prediction tasks. Execution logs, prediction files and JSON summaries provide evidence of successful execution and matching input and output record counts.
 
-Execution logs are stored in:
+These resources provide the documented instructions and project artifacts needed to set up and execute the workflow again.
+
+**Verification scope:** The available execution evidence establishes successful pipeline execution. Independent execution in a separate clean temporary environment has not been established as part of the available verification evidence.
+
+### 7.2 Logging
+
+The Week 8 pipeline uses Python logging to record execution information.
+
+Logging includes:
+
+- Pipeline execution events.
+- Prediction task information.
+- Successful execution messages.
+- Input and output validation information.
+- Error details.
+
+The primary execution log is stored in:
 
 `Logs/week8_pipeline.log`
 
-These measures improve execution reliability, traceability and reproducibility across supported prediction tasks.
+The pipeline configures INFO-level console and file logging.
+
+If file-logging setup encounters an `OSError`, the pipeline continues with console logging.
+
+### 7.3 Error Handling
+
+The integrated pipeline incorporates the following engineering safeguards:
+
+- Input file validation.
+- Model artifact validation.
+- Required feature validation.
+- Prediction and output record-count checks.
+- Output path validation.
+- Explicit exception handling.
+- Execution logging and error reporting.
+- Console logging fallback when file-logging setup fails.
+- Top-level exception handling for unexpected execution failures.
+
+These safeguards improve execution reliability, traceability and maintainability.
 
 ## 8. Responsible AI and Deployment Considerations
 
@@ -257,30 +322,73 @@ The following principles guided the project:
 5. Consider patient confidentiality, data protection and potential model bias.
 6. Do not use exploratory predictions as the sole basis for clinical or operational decisions.
 
-### Proposed Deployment Architecture
+### 8.1 Proposed Deployment Architecture
 
 The proposed deployment architecture is conceptual and is not an implemented clinical application.
 
 A potential deployment workflow could connect hospital systems to a web dashboard and API, validate incoming data, apply preprocessing and trained models, return predictions with explanations, and route results for human review.
 
-The current engineering package establishes the reusable prediction pipeline and supporting model artifacts for demonstration. The project does not claim a production clinical deployment.
+The current engineering package establishes the reusable prediction pipeline and supporting model artifacts for demonstration.
 
-### Data Science Model Coordination
+The project does not claim a production clinical deployment.
+
+### 8.2 Data Science Model Coordination
 
 No separate final model artifact was supplied by the Data Science track for the Week 8 integration.
 
-The ML Engineering pipeline therefore integrates the available saved model artifacts for all seven supported prediction tasks. The integrated workflow, its model inputs, prediction outputs and engineering validation are documented in this repository.
+The ML Engineering pipeline therefore integrates the available saved model artifacts for all seven supported prediction tasks.
+
+The integrated workflow, its model inputs, prediction outputs and engineering validation are documented in this repository.
 
 This handover accurately reflects the available model artifacts and the engineering integration completed. It does not claim receipt, approval or direct participation by the Data Science track in the final integration.
 
-## 9. Conclusion
+## 9. Known Limitations
+
+The following limitations remain relevant to interpreting the project results:
+
+1. **Insurance claims:** No Rejected class exists in the supplied source dataset. The available classification task distinguishes Approved from Pending claims only.
+2. **High-risk classification:** Diagnosis severity is a proxy target rather than a clinically validated risk outcome.
+3. **Patient satisfaction:** Available ratings provide limited linked records for modelling and analysis.
+4. **Length of stay:** The modelling dataset contains only 586 linked admission records.
+5. **Facility analysis:** Weak facility relationships limit the reliability of some facility-level comparisons.
+6. **Model performance:** Some models perform close to or below baseline alternatives and require further improvement before practical predictive use.
+7. **Explainability:** Feature importance and SHAP results describe model behaviour and do not establish causation.
+8. **Anomaly detection:** Identified anomalies require contextual review and are not automatically evidence of errors or fraud.
+9. **Clinical validation:** No clinical validation or real-world deployment approval has been established.
+10. **Reproducibility evidence:** Successful recorded execution is available, but independent clean-environment execution has not been established in the available evidence.
+
+These limitations are documented to ensure that the engineering outputs are interpreted within their actual scope.
+
+## 10. Final Integration and Handover
+
+The Week 8 engineering package brings together:
+
+- Prepared machine learning datasets.
+- Saved classification, regression and clustering models.
+- An integrated prediction pipeline.
+- Documented input and output requirements.
+- Pinned dependencies and environment setup instructions.
+- Pipeline logging and error handling.
+- Week 7 testing and reliability evidence.
+- Cross-track validation findings.
+- Prediction outputs and execution summaries.
+- Known limitations and responsible AI considerations.
+- Project documentation and presentation materials.
+
+The integrated pipeline provides a common execution workflow for the seven supported prediction tasks.
+
+The available saved model artifacts were used because no separate final Data Science model artifact was supplied for integration.
+
+The package is prepared for engineering handover and demonstration within its documented scope.
+
+## 11. Conclusion
 
 The HealthConnect Rwanda ML Engineering project establishes a structured workflow covering data preparation, model development, evaluation, pipeline testing and integrated prediction execution.
 
-Week 6 delivered the modelling, evaluation, clustering and explainability workflows. Week 7 strengthened pipeline reliability through targeted testing, data-cleaning improvements and cross-track validation. Week 8 delivered a reusable prediction pipeline supporting seven tasks, with logging, error handling, output validation and clean-environment reproducibility.
+Week 6 delivered the modelling, evaluation, clustering and explainability workflows. Week 7 strengthened pipeline reliability through targeted testing, data-cleaning improvements and cross-track validation. Week 8 delivered a reusable prediction pipeline supporting seven tasks, with logging, error handling, output validation and reproducibility documentation.
 
-The Week 7 test suite recorded 38 passing checks with no failures. All seven Week 8 prediction tasks also completed successfully during clean-environment reproducibility validation, with matching input and output record counts.
+The Week 7 test suite recorded 38 passing checks with no failures. All seven Week 8 prediction tasks also completed successfully during the recorded pipeline execution, with matching input and output record counts.
 
-The completed engineering package is ready for handover and demonstration within its documented scope.
+The completed engineering package provides the required foundation for final integration handover and demonstration within its documented scope.
 
 The models remain provisional and are not clinically validated. Their predictions must not be treated as established clinical outcomes or used as the sole basis for real-world healthcare decisions.
